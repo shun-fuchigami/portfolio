@@ -558,6 +558,28 @@ eval("\n\nmodule.exports = {\n  isString: function(arg) {\n    return typeof(arg
 
 /***/ }),
 
+/***/ "./src/js/app/App.js":
+/*!***************************!*\
+  !*** ./src/js/app/App.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"App\": () => (/* binding */ App)\n/* harmony export */ });\n/* harmony import */ var pixi_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pixi.js */ \"./node_modules/pixi.js/dist/esm/pixi.js\");\n\n\n/**\n * Appクラス\n * PIXIキャンバスを生成\n */\nclass App{\n  static createApp = () => {\n    // キャンバスサイズと背景色を指定してステージを作成\n    const app = new pixi_js__WEBPACK_IMPORTED_MODULE_0__.Application({\n      resolution: window.devicePixelRatio || 1,\n      autoDensity: true,\n      backgroundColor: 0x485859, // 背景色(= #cccccc),\n      width:window.innerWidth,\n      height:window.innerHeight-50,\n    });\n    document.body.appendChild(app.view);\n    return app;\n  }\n}\n\n//# sourceURL=webpack://portfolio/./src/js/app/App.js?");
+
+/***/ }),
+
+/***/ "./src/js/config.js":
+/*!**************************!*\
+  !*** ./src/js/config.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"MAX_HEIGHT\": () => (/* binding */ MAX_HEIGHT),\n/* harmony export */   \"TILE_HEIGHT\": () => (/* binding */ TILE_HEIGHT),\n/* harmony export */   \"TILE_MAP\": () => (/* binding */ TILE_MAP),\n/* harmony export */   \"TILE_MAP_SIZE\": () => (/* binding */ TILE_MAP_SIZE),\n/* harmony export */   \"TILE_START_X\": () => (/* binding */ TILE_START_X),\n/* harmony export */   \"TILE_START_Y\": () => (/* binding */ TILE_START_Y),\n/* harmony export */   \"TILE_WIDTH\": () => (/* binding */ TILE_WIDTH)\n/* harmony export */ });\n/**\n * 設定関連\n */\n\n\n/**\n * グリッドのサイズ\n */\nconst TILE_MAP_SIZE = 10;\n\n/**\n * タイルの幅\n */\nconst TILE_WIDTH = 100;\nconst TILE_HEIGHT = TILE_WIDTH/2;\nconst MAX_HEIGHT = 80; \n\n/**\n * タイルの開始地点\n */\n\n const TILE_START_X = window.innerWidth / 2 - TILE_WIDTH / 2;\n const TILE_START_Y = 32;\n \n\n/**\n * タイルマップ\n */\nconst TILE_MAP = [\n  [1,2,3,4,5,6,7,8,9,10,],\n  [1,2,3,4,5,6,7,8,9,10,],\n  [1,2,3,4,5,6,7,8,9,10,],\n  [1,2,3,4,5,6,7,8,9,10,],\n  [1,2,3,4,5,6,7,8,9,10,],\n  [1,2,3,4,5,6,7,8,9,10,],\n  [1,2,3,4,5,6,7,8,9,10,],\n  [1,2,3,4,5,6,7,8,9,10,],\n  [1,2,3,4,5,6,7,8,9,10,],\n  [1,2,3,4,5,6,7,8,9,10,],\n]\n\n\n\n//# sourceURL=webpack://portfolio/./src/js/config.js?");
+
+/***/ }),
+
 /***/ "./src/js/index.js":
 /*!*************************!*\
   !*** ./src/js/index.js ***!
@@ -565,7 +587,18 @@ eval("\n\nmodule.exports = {\n  isString: function(arg) {\n    return typeof(arg
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var pixi_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pixi.js */ \"./node_modules/pixi.js/dist/esm/pixi.js\");\n\n\n// ステージを作る\nconst createApp = () => {\n  // キャンバスサイズと背景色を指定してステージを作成\n  const app = new pixi_js__WEBPACK_IMPORTED_MODULE_0__.Application({\n      resolution: window.devicePixelRatio || 1,\n      autoDensity: true,\n      backgroundColor: 0x485859, // 背景色(= #cccccc),\n  });\n  document.body.appendChild(app.view);\n  return app;\n}\nconst app = createApp()\n\n\n\n\n\n//# sourceURL=webpack://portfolio/./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var pixi_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pixi.js */ \"./node_modules/pixi.js/dist/esm/pixi.js\");\n/* harmony import */ var _app_App_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app/App.js */ \"./src/js/app/App.js\");\n/* harmony import */ var _loader_Loaderimg_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./loader/Loaderimg.js */ \"./src/js/loader/Loaderimg.js\");\n/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./config.js */ \"./src/js/config.js\");\n\n\n\n \n\n/**\n * メイン処理\n */\n\n\n  /**\n   * リサイズ設定\n   */\n  window.addEventListener('resize',()=>{\n    app.renderer.resize(window.innerWidth, window.innerHeight-50);\n  });\n  \n  \n  /**\n   * PIXIキャンバスの生成\n   */\n  const app = _app_App_js__WEBPACK_IMPORTED_MODULE_1__.App.createApp()\n      \n  /**\n   * コンテナの生成\n   * キャンバスへ追加\n   */\n  const tileContainer = new pixi_js__WEBPACK_IMPORTED_MODULE_0__.Container();\n  app.stage.addChild(tileContainer);\n\n\n  /**\n   * 読み込んだスプライトをコンテナへ追加\n   */\n  for (let i = 0; i < _config_js__WEBPACK_IMPORTED_MODULE_3__.TILE_MAP_SIZE; i++){\n    for (let j = 0; j < _config_js__WEBPACK_IMPORTED_MODULE_3__.TILE_MAP_SIZE; j++){\n      let tile = _loader_Loaderimg_js__WEBPACK_IMPORTED_MODULE_2__.Loaderimg.tileLoad(_config_js__WEBPACK_IMPORTED_MODULE_3__.TILE_MAP[i][j]);\n      tile.x = _config_js__WEBPACK_IMPORTED_MODULE_3__.TILE_START_X / 2 + (i-j) * _config_js__WEBPACK_IMPORTED_MODULE_3__.TILE_WIDTH /2;\n      tile.y = _config_js__WEBPACK_IMPORTED_MODULE_3__.TILE_START_Y / 2 + (i+j) * _config_js__WEBPACK_IMPORTED_MODULE_3__.TILE_HEIGHT /2;\n    }\n  }\n\n\n\n\n\n\n\n\n\n//# sourceURL=webpack://portfolio/./src/js/index.js?");
+
+/***/ }),
+
+/***/ "./src/js/loader/Loaderimg.js":
+/*!************************************!*\
+  !*** ./src/js/loader/Loaderimg.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Loaderimg\": () => (/* binding */ Loaderimg)\n/* harmony export */ });\n/* harmony import */ var pixi_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pixi.js */ \"./node_modules/pixi.js/dist/esm/pixi.js\");\n\n/**\n * ローダークラス\n * 画像の読み込みを行う\n */\nclass Loaderimg{\n  /**\n   * @returns 読み込んだタイルスプライトの配列を返す\n   */\n  static tileLoad = (index) => {\n    return new pixi_js__WEBPACK_IMPORTED_MODULE_0__.Sprite.from(`./imgs/tile-${index}.png`);\n  }\n}\n\n\n\n\n\n//# sourceURL=webpack://portfolio/./src/js/loader/Loaderimg.js?");
 
 /***/ })
 
