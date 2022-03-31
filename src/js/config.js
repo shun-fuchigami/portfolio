@@ -13,19 +13,19 @@ export const TILE_MAP_SIZE = 10;
  */
 export const TILE_WIDTH = 100;
 export const TILE_HEIGHT = TILE_WIDTH/2;
-export const MAX_HEIGHT = 80; 
 
 /**
  * タイルの開始地点
  */
 
- export const TILE_START_Y = 32;
+ export const TILE_START_Y = 150;
  
 
 /**
- * タイルマップ
+ * タイルマップ 読み込むタイル画像の番号を設定
  */
 export const TILE_MAP = [
+  [1,20,3,4,5,6,20,8,9,10,],
   [1,2,3,4,5,6,7,8,9,10,],
   [1,2,3,4,5,6,7,8,9,10,],
   [1,2,3,4,5,6,7,8,9,10,],
@@ -34,10 +34,12 @@ export const TILE_MAP = [
   [1,2,3,4,5,6,7,8,9,10,],
   [1,2,3,4,5,6,7,8,9,10,],
   [1,2,3,4,5,6,7,8,9,10,],
-  [1,2,3,4,5,6,7,8,9,10,],
-  [1,2,3,4,5,6,7,8,9,10,],
+  [1,2,3,4,5,6,20,8,9,36,],
 ]
 
+/**
+ * スプライトにしたタイルを保持
+ */
 export const TILES = [
   [],
   [],
@@ -50,6 +52,3 @@ export const TILES = [
   [],
   [],
 ];
-
-export const DEFAULT_WIDTH = 1440;
-export const DEFAULT_HEGHIT = 990;

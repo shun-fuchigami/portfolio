@@ -5,7 +5,7 @@ import * as PIXI from 'pixi.js';
  */
 export class Loaderimg{
   /**
-   * @returns 読み込んだタイルスプライトの配列を返す
+   * @returns 生成したタイルスプライト
    */
   static tileLoad = (index) => {
     return new PIXI.Sprite.from(`./imgs/tile-${index}.png`);

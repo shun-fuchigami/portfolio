@@ -8,8 +8,6 @@ import {
   TILE_HEIGHT,
   TILE_START_Y,
   TILES,
-  DEFAULT_WIDTH,
-  DEFAULT_HEGHIT
   } from './config.js' 
 
 /**
@@ -36,6 +34,7 @@ import {
    * PIXIキャンバスの生成
    */
   const app = App.createApp();
+
   /**
    * コンテナの生成
    * キャンバスへ追加
@@ -45,6 +44,7 @@ import {
 
   /**
    * 読み込んだスプライトをコンテナへ追加
+   * TILE_MAPの配列番号をx,y 配列の値を読み込む画像としてスプライトを生成
    */
 
   for (let i = 0; i < TILE_MAP_SIZE; i++){
@@ -52,12 +52,12 @@ import {
       let tile = Loaderimg.tileLoad(TILE_MAP[i][j]);
       tile.x = (i-j) * TILE_WIDTH /2;
       tile.y = TILE_START_Y  + (i+j) * TILE_HEIGHT /2;
-      tile.anchor.set(0.5);
+      console.log(tile.texture.baseTexture.realWidth);
+      tile.anchor.set(0.5,1);
       tileContainer.addChild(tile);
       TILES[i][j] = tile;
     }
   }
-  console.log(tileContainer.x);
 
 
 
