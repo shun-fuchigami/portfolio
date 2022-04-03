@@ -1,19 +1,17 @@
 import * as PIXI from 'pixi.js';
+import { BaseContainer } from './BaseContainer';
 
 /**
  * ヒーロー・タイル・アイテムを管理するコンテナクラス
  */
-export class TileContainer{
+export class TileContainer extends BaseContainer{
 
   /**
    * コンストラクター
    */
   constructor(){
-  
-    /**
-     * コンテナのインスタンスを生成
-     */
-    this.container = new PIXI.Container();
+    
+    super();
   
     /**
      * タイルスプライトを保持する配列
@@ -82,15 +80,6 @@ export class TileContainer{
       return;
     }
   }
-
-  /**
-   * スプライトを保持するインスタンスをタイルコンテナを追加する
-   * @param {*} instance 
-   */
-  add(instance){
-    this.container.addChild(instance.sprite);
-  }
-
 
   setObjectUserMap(tileX,tileY){
     if(!this.OBJECT_USED_MAP[tileX][tileY]){
