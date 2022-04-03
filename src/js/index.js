@@ -16,29 +16,48 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
  */
 
   /**
-   * リサイズ設定
+   * ロード・リサイズ設定
    */ 
-
-  
-  
   window.addEventListener('load',()=>{
-    viewWidth() < 1000?tileContainer.container.scale.set(0.8):tileContainer.container.scale.set(1);
+    if(viewWidth() < 1000){
+      tileContainer.container.scale.set(0.8);
+      controllerContainer.container.scale.set(0.5);
+      arrowContainer.container.x-=100
+      buttonContainer.container.x +=100
+    }else{
+      tileContainer.container.scale.set(1);
+      controllerContainer.container.scale.set(1);
+    }
     app.renderer.resize(viewWidth(),viewHeight());
     tileContainer.container.x = app.screen.width/2;
+    controllerContainer.container.x = app.screen.width/2;
     outerCircle.initGraphics();
     outerCircle.renderOuterCircle();
     innerCircle.initGraphics();
     innerCircle.renderInnerCircle();
+    
   })
   
   window.addEventListener('resize',()=>{
-    viewWidth() < 1000?tileContainer.container.scale.set(0.8):tileContainer.container.scale.set(1);
+    if(viewWidth() < 1000){
+      tileContainer.container.scale.set(0.8);
+      controllerContainer.container.scale.set(0.5);
+      arrowContainer.container.x -=100
+      buttonContainer.container.x +=100
+    }else{
+      tileContainer.container.scale.set(1);
+      controllerContainer.container.scale.set(1);
+      arrowContainer.container.x+=100
+      buttonContainer.container.x-=100
+    }
     app.renderer.resize(viewWidth(),viewHeight());
     tileContainer.container.x = app.screen.width/2;
+    controllerContainer.container.x = app.screen.width/2;
     outerCircle.initGraphics();
     outerCircle.renderOuterCircle();
     innerCircle.initGraphics();
     innerCircle.renderInnerCircle();
+
   })
   
   /**
@@ -53,20 +72,18 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
      */
      const outerCircle = new BackGroundGraphics(0xe5d6d2,1);
      outerCircle.initGraphics();
- 
+     outerCircle.renderOuterCircle();
+    
      /**
       * 内側の円
       */
      const innerCircle = new BackGroundGraphics(0xdbccc8,1);
      innerCircle.initGraphics();
+     innerCircle.renderInnerCircle();
        
      /**
-      * 図形の描写
       * コンテナ追加
       */
-     outerCircle.renderOuterCircle();
-     innerCircle.renderInnerCircle();
-
      app.stage.addChild(outerCircle.graphics);
      app.stage.addChild(innerCircle.graphics);
   
@@ -79,12 +96,9 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
   tileContainer.container.x = app.screen.width/2;
   app.stage.addChild(tileContainer.container);
 
-
- 
   /**
    * タイルスプライトの生成・コンテナ追加
    */
-
   for (let i = 0; i < TILE_MAP_SIZE; i++){
     for (let j = 0; j < TILE_MAP_SIZE; j++){
       let tile = new Tile(i,j);
@@ -116,12 +130,20 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
   const controllerContainer = new ControllerContainer();
   const arrowContainer = new ArrowContainer();
   const buttonContainer = new ButtonContainer();
-  
-;
-  
+    
+
   app.stage.addChild(controllerContainer.container);
-  arrowContainer.addContainer(arrowContainer);
-  buttonContainer.addContainer(buttonContainer);
+  controllerContainer.addContainer(arrowContainer);
+  controllerContainer.addContainer(buttonContainer);
+
+  controllerContainer.container.x = app.screen.width/2;
+  controllerContainer.container.y = app.screen.height/1.8;
+  arrowContainer.container.x -= 300
+  buttonContainer.container.x += 250
+  
+
+  arrowContainer.container.alpha = 0.5;
+  buttonContainer.container.alpha = 0.5;
 
   /**
    * コントローラースプライトの生成

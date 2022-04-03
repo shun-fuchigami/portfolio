@@ -7,14 +7,14 @@ export class Controller{
 
     switch (name) {
       case "a":
-        this.sprite.anchor.set(-1,1); 
+        this.sprite.anchor.set(0,1); 
         this.sprite.x = 0;
         this.sprite.y = 0;
         this.sprite.interactive = true;
         this.sprite.buttonMode = true;
         break;
       case "b":
-        this.sprite.anchor.set(0,0); 
+        this.sprite.anchor.set(1,0); 
         this.sprite.x = 0;
         this.sprite.y = 0;
         this.sprite.interactive = true;

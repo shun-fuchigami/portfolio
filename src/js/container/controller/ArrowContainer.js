@@ -5,5 +5,4 @@ export class ArrowContainer extends BaseContainer{
   constructor(){
     super();
   }
-
 }

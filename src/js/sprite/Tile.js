@@ -24,7 +24,7 @@ export class Tile{
 
   initTile(){
     this.sprite.x = (this.tileX-this.tileY) * TILE_WIDTH /2;
-    this.sprite.y = TILE_START_Y + (this.tileX+this.tileY) * TILE_HEIGHT /2;
+    this.sprite.y = app.screen.height/4 + (this.tileX+this.tileY) * TILE_HEIGHT /2;
   }
 }
 
