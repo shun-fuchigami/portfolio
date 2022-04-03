@@ -12,8 +12,8 @@ export class App{
       resolution: window.devicePixelRatio || 1,
       autoDensity: true,
       backgroundColor: 0xF2E0DC,
-      width:window.innerWidth,
-      height:window.innerHeight,
+      width:1440,
+      height:900,
     });
     document.body.appendChild(app.view);
     return app;
