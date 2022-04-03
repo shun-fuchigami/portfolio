@@ -4,7 +4,7 @@ const outputPath = path.resolve(__dirname, 'dist');
 
 module.exports = {
     // バンドルするファイルを指定
-    entry: './src/index.js',
+    entry: './src/js/index.js',
     mode: 'development',
     output: {
         // バンドルしてmain.jsとして出力
