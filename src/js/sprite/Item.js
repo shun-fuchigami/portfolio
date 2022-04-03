@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 
-class Hero{
+class Item{
   constructor(texture,tileX,tileY){
     this.sprite = new PIXI.AnimatedSprite.fromImages();
     this.tileX = tileX;
