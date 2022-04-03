@@ -52,3 +52,6 @@ export const TILES = [
   [],
   [],
 ];
+
+export let viewWidth = () => document.documentElement.clientWidth;
+export let viewHeight = () => document.documentElement.clientHeight;

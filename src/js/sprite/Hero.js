@@ -64,6 +64,15 @@ export class Hero{
           break;
         }
       }
+
+  getPosition(type="x"){
+    if(type==="x"){
+      return this.sprite.x
+    } else{
+      return this.sprite.y;
+    }
+
+  }
 }
 
 

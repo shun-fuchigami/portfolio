@@ -7,7 +7,7 @@ import { Controller } from './sprite/controller/Controller.js';
 import { BackGroundGraphics } from './graphics/BackGroundGraphics.js';
 import { TileContainer } from './container/TileContainer.js';
 import { ControllerContainer } from './container/Controller/ControllerContainer.js';
-import { TILE_MAP_SIZE,} from './config.js' 
+import { TILE_MAP_SIZE,viewWidth,viewHeight} from './config.js' 
 import { ButtonContainer } from './container/Controller/ButtonContainer.js';
 import { ArrowContainer } from './container/Controller/ArrowContainer.js';
 
@@ -18,68 +18,71 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
   /**
    * リサイズ設定
    */ 
-  window.addEventListener('load',(e)=>{
-    app.renderer.resize(window.innerWidth , window.innerHeight);
-    app.stage.scale.set(window.innerWidth / screen.width);
-  });
+
   
-  window.addEventListener('resize',(e)=>{
-    app.renderer.resize(window.innerWidth , window.innerHeight);
-    app.stage.scale.set(window.innerWidth / screen.width);
-  });
+  
+  window.addEventListener('load',()=>{
+    viewWidth() < 1000?tileContainer.container.scale.set(0.8):tileContainer.container.scale.set(1);
+    app.renderer.resize(viewWidth(),viewHeight());
+    tileContainer.container.x = app.screen.width/2;
+    outerCircle.initGraphics();
+    outerCircle.renderOuterCircle();
+    innerCircle.initGraphics();
+    innerCircle.renderInnerCircle();
+  })
+  
+  window.addEventListener('resize',()=>{
+    viewWidth() < 1000?tileContainer.container.scale.set(0.8):tileContainer.container.scale.set(1);
+    app.renderer.resize(viewWidth(),viewHeight());
+    tileContainer.container.x = app.screen.width/2;
+    outerCircle.initGraphics();
+    outerCircle.renderOuterCircle();
+    innerCircle.initGraphics();
+    innerCircle.renderInnerCircle();
+  })
   
   /**
    * PIXIキャンバスの生成
    */
   export const app = App.createApp();
-
-  /**
+ /**
    * 背景図形の生成
    */
     /**
      * 外側の円
      */
-    const outerCircle = new BackGroundGraphics(
-      app.screen.width / 2,
-      app.screen.height,
-      app.screen.width,
-      app.screen.height,
-      0xe5d6d2,
-      1);
-      
-    /**
-     * 内側の円
-     */
-    const innerCircle = new BackGroundGraphics(
-      app.screen.width/2,
-      app.screen.height,
-      app.screen.width - 20,
-      app.screen.height - 20,
-      0xdbccc8,
-      1);
-      
-      
-    /**
-     * 図形の描写
-     */
-    outerCircle.renderCircle();
-    innerCircle.renderCircle();
-      
-    /**
-     * ステージへ追加
-     */
-    app.stage.addChild(outerCircle.graphics);
-    app.stage.addChild(innerCircle.graphics);
-    
+     const outerCircle = new BackGroundGraphics(0xe5d6d2,1);
+     outerCircle.initGraphics();
+ 
+     /**
+      * 内側の円
+      */
+     const innerCircle = new BackGroundGraphics(0xdbccc8,1);
+     innerCircle.initGraphics();
+       
+     /**
+      * 図形の描写
+      * コンテナ追加
+      */
+     outerCircle.renderOuterCircle();
+     innerCircle.renderInnerCircle();
+
+     app.stage.addChild(outerCircle.graphics);
+     app.stage.addChild(innerCircle.graphics);
+  
   /**
    * タイルコンテナの生成
    * キャンバスへ追加
    */
   const tileContainer = new TileContainer();
+  tileContainer.container.pivot.set(0.5);
+  tileContainer.container.x = app.screen.width/2;
   app.stage.addChild(tileContainer.container);
 
+
+ 
   /**
-   * TILE_MAPの配列番号をx,y としてタイルスプライトの生成・コンテナ追加
+   * タイルスプライトの生成・コンテナ追加
    */
 
   for (let i = 0; i < TILE_MAP_SIZE; i++){
@@ -114,13 +117,11 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
   const arrowContainer = new ArrowContainer();
   const buttonContainer = new ButtonContainer();
   
-  controllerContainer.container.x = app.screen.width * 0.1;
-  controllerContainer.container.y = app.screen.height * 0.75;
+;
   
-
   app.stage.addChild(controllerContainer.container);
-  controllerContainer.addContainer(arrowContainer);
-  controllerContainer.addContainer(buttonContainer);
+  arrowContainer.addContainer(arrowContainer);
+  buttonContainer.addContainer(buttonContainer);
 
   /**
    * コントローラースプライトの生成
@@ -147,28 +148,18 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
    */
   const key = new Key();
 
-
   /**
    * アニメーションループをスタート
    */
   app.ticker.add((dt)=>{
 
-    /**
-     * キー入力かつ初回入力の場合は方向転換
-     */
     if(key.isKeyDown && key.isFirst){
       hero.setDirection(key.code);
 
-    /**
-     * キー入力かつ2回目以降の入力の場合は移動
-     */
     }else if(key.isKeyDown && !(key.isFirst)){
       hero.move(key.code)
       hero.sprite.play()
 
-    /**
-     * それ以外の場合＝キー見入力の場合はアニメーションストップ
-     */
     }else {
       hero.sprite.stop();
       hero.initSpriteFrame();
@@ -194,9 +185,5 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
     }
     key.setStatus(key.code,false);
   })
-
-
-console.log(window.innerWidth);
-console.log(window.innerHeight);
 
 

@@ -6,8 +6,7 @@ import * as PIXI from 'pixi.js';
  */
 export class App{
   static createApp = () => {
-    let w = 1440;
-    let h = 900;
+
     const app = new PIXI.Application({
       resolution: window.devicePixelRatio || 1,
       autoDensity: true,
