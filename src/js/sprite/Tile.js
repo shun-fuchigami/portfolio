@@ -4,9 +4,7 @@ import {
   TILE_IMG_MAP,
   TILE_WIDTH,
   TILE_HEIGHT,
-  TILE_START_Y,
   } from '../config.js' 
-  import {app} from '../index.js';
 
 export class Tile{
 
@@ -20,11 +18,18 @@ export class Tile{
     this.tileY = tileY;
     this.sprite = LoaderImg.tileLoad(TILE_IMG_MAP[tileX][tileY]);
     this.sprite.anchor.set(0.5,1);
+    this.hitArea = {
+      "x":[],
+      "y":[],
+    }
+    this.onHero = false
   }
 
   initTile(){
     this.sprite.x = (this.tileX-this.tileY) * TILE_WIDTH /2;
     this.sprite.y = (this.tileX+this.tileY) * TILE_HEIGHT /2;
   }
+
+  
 }
 
