@@ -55,5 +55,9 @@ export class LoaderImg{
     
     return heroTextures;  
   }
+
+  static controllerLoad(name){
+    return new PIXI.Sprite.from(`./imgs/buttons/button-${name}.png`);
+  }
 }
 
