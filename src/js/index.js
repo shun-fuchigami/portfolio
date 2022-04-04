@@ -43,11 +43,11 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
       buttonContainer.container.x +=500
     }else{
       tileContainer.container.scale.set(1.2);
-      controllerContainer.container.scale.set(1.2);
+      controllerContainer.container.scale.set(2);
       arrowContainer.container.x -= 200
       buttonContainer.container.x += 150
-      arrowContainer.container.y += 100
-      buttonContainer.container.y += 100
+      arrowContainer.container.y += 300
+      buttonContainer.container.y += 300
     }
     
   })
@@ -81,8 +81,8 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
       controllerContainer.container.scale.set(2);
       arrowContainer.container.x -= 200
       buttonContainer.container.x += 150
-      arrowContainer.container.y += 100
-      buttonContainer.container.y += 100
+      arrowContainer.container.y += 300
+      buttonContainer.container.y += 300
     }
 
   })
