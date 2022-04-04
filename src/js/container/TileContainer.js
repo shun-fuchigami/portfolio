@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import { BaseContainer } from './BaseContainer';
-
+import { app } from '../index.js';
 /**
  * ヒーロー・タイル・アイテムを管理するコンテナクラス
  */
@@ -12,7 +12,7 @@ export class TileContainer extends BaseContainer{
   constructor(){
     
     super();
-  
+    this.initPosition();
     /**
      * タイルスプライトを保持する配列
      */
@@ -41,6 +41,10 @@ export class TileContainer extends BaseContainer{
     ];
   }
 
+  initPosition(){
+    this.container.x = app.screen.width/2;
+    this.container.y = app.screen.height/4;
+  }
   /**
    * タイルスプライトを配置
    * @param {Tile} 
@@ -50,7 +54,7 @@ export class TileContainer extends BaseContainer{
   }
 
   /**
-   * @param {number} tileX 
+   * @param {number } tileX 
    * @param {number} tileY 
    * @returns 座標に応じたタイルスプライトを返す
    */
@@ -81,6 +85,7 @@ export class TileContainer extends BaseContainer{
     }
   }
 
+
   setObjectUserMap(tileX,tileY){
     if(!this.OBJECT_USED_MAP[tileX][tileY]){
       this.OBJECT_USED_MAP[tileX][tileY] = 1;
@@ -88,4 +93,5 @@ export class TileContainer extends BaseContainer{
       return
     }
   }
+
 }

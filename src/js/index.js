@@ -14,49 +14,76 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
 /**
  * メイン処理
  */
-
   /**
    * ロード・リサイズ設定
    */ 
   window.addEventListener('load',()=>{
-    if(viewWidth() < 1000){
-      tileContainer.container.scale.set(0.8);
-      controllerContainer.container.scale.set(0.5);
-      arrowContainer.container.x-=100
-      buttonContainer.container.x +=100
-    }else{
-      tileContainer.container.scale.set(1);
-      controllerContainer.container.scale.set(1);
-    }
+
     app.renderer.resize(viewWidth(),viewHeight());
-    tileContainer.container.x = app.screen.width/2;
-    controllerContainer.container.x = app.screen.width/2;
+    
     outerCircle.initGraphics();
     outerCircle.renderOuterCircle();
     innerCircle.initGraphics();
     innerCircle.renderInnerCircle();
+
+    tileContainer.initPosition();
+    controllerContainer.initPosition();
+    arrowContainer.initPosition();
+    buttonContainer.initPosition();
+
+    if(viewWidth() >= 1000){
+      tileContainer.container.scale.set(1);
+      controllerContainer.container.scale.set(0.8);
+      arrowContainer.container.x -= 300 
+      buttonContainer.container.x += 300
+    }else if(viewWidth() >= 600){
+      tileContainer.container.scale.set(0.8);
+      controllerContainer.container.scale.set(0.5);
+      arrowContainer.container.x -=500
+      buttonContainer.container.x +=500
+    }else{
+      tileContainer.container.scale.set(1.2);
+      controllerContainer.container.scale.set(1.2);
+      arrowContainer.container.x -= 200
+      buttonContainer.container.x += 150
+      arrowContainer.container.y += 100
+      buttonContainer.container.y += 100
+    }
     
   })
   
   window.addEventListener('resize',()=>{
-    if(viewWidth() < 1000){
-      tileContainer.container.scale.set(0.8);
-      controllerContainer.container.scale.set(0.5);
-      arrowContainer.container.x -=100
-      buttonContainer.container.x +=100
-    }else{
-      tileContainer.container.scale.set(1);
-      controllerContainer.container.scale.set(1);
-      arrowContainer.container.x+=100
-      buttonContainer.container.x-=100
-    }
+
     app.renderer.resize(viewWidth(),viewHeight());
-    tileContainer.container.x = app.screen.width/2;
-    controllerContainer.container.x = app.screen.width/2;
+    
     outerCircle.initGraphics();
     outerCircle.renderOuterCircle();
     innerCircle.initGraphics();
     innerCircle.renderInnerCircle();
+
+    tileContainer.initPosition();
+    controllerContainer.initPosition();
+    arrowContainer.initPosition();
+    buttonContainer.initPosition();
+
+    if(viewWidth() >= 1000){
+      tileContainer.container.scale.set(1);
+      controllerContainer.container.scale.set(0.8);
+      arrowContainer.container.x -= 300 
+      buttonContainer.container.x += 300
+    }else if(viewWidth() >= 600){
+      tileContainer.container.scale.set(0.8);
+      controllerContainer.container.scale.set(0.5);
+      arrowContainer.container.x -= 500
+      buttonContainer.container.x += 500
+    }else{
+      tileContainer.container.scale.set(1.2);
+      controllerContainer.container.scale.set(2);
+      arrowContainer.container.x -= 200
+      buttonContainer.container.x += 150
+      arrowContainer.container.y += 100
+      buttonContainer.container.y += 100
+    }
 
   })
   
