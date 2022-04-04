@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import { DEF_HEIGHT, DEF_WIDTH } from '../config';
 
 /**
  * Appクラス
@@ -11,11 +12,13 @@ export class App{
       resolution: window.devicePixelRatio || 1,
       autoDensity: true,
       backgroundColor: 0xF2E0DC,
-      width:1440,
-      height:900,
+      width:window.innerWidth,
+      height:window.innerHeight,
     });
     document.body.appendChild(app.view);
     return app;
   }
+
+  static 
 
 }

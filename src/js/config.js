@@ -53,5 +53,9 @@ export const TILES = [
   [],
 ];
 
-export let viewWidth = () => document.documentElement.clientWidth;
-export let viewHeight = () => document.documentElement.clientHeight;
+export let viewWidth = () => window.innerWidth;
+export let viewHeight = () => window.innerHeight;
+export const DEF_WIDTH = 900;
+export const DEF_HEIGHT = 600;
+export const DEF_RETIO_X = 1; 
+export const DEF_RETIO_Y = 0.75; 

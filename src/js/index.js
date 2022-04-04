@@ -7,7 +7,7 @@ import { Controller } from './sprite/controller/Controller.js';
 import { BackGroundGraphics } from './graphics/BackGroundGraphics.js';
 import { TileContainer } from './container/TileContainer.js';
 import { ControllerContainer } from './container/Controller/ControllerContainer.js';
-import { TILE_MAP_SIZE,viewWidth,viewHeight} from './config.js' 
+import { TILE_MAP_SIZE,viewWidth,viewHeight, DEF_HEIGHT, DEF_WIDTH} from './config.js' 
 import { ButtonContainer } from './container/Controller/ButtonContainer.js';
 import { ArrowContainer } from './container/Controller/ArrowContainer.js';
 
@@ -18,7 +18,6 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
    * ロード・リサイズ設定
    */ 
   window.addEventListener('load',()=>{
-
     app.renderer.resize(viewWidth(),viewHeight());
     
     outerCircle.initGraphics();
@@ -34,25 +33,36 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
     if(viewWidth() >= 1000){
       tileContainer.container.scale.set(1);
       controllerContainer.container.scale.set(0.8);
-      arrowContainer.container.x -= 300 
-      buttonContainer.container.x += 300
+      arrowContainer.container.x -= 500 
+      buttonContainer.container.x += 500
+      arrowContainer.container.y += 250 
+      buttonContainer.container.y += 250
     }else if(viewWidth() >= 600){
       tileContainer.container.scale.set(0.8);
       controllerContainer.container.scale.set(0.5);
       arrowContainer.container.x -=500
       buttonContainer.container.x +=500
+      arrowContainer.container.y += 250 
+      buttonContainer.container.y += 250
     }else{
-      tileContainer.container.scale.set(1.2);
-      controllerContainer.container.scale.set(2);
+      tileContainer.container.scale.set(0.5);
+      controllerContainer.container.scale.set(1);
       arrowContainer.container.x -= 200
       buttonContainer.container.x += 150
-      arrowContainer.container.y += 300
-      buttonContainer.container.y += 300
+      arrowContainer.container.y += 80
+      buttonContainer.container.y +=80
+      
     }
-    
   })
   
+
+
   window.addEventListener('resize',()=>{
+    app.renderer.resize(viewWidth() * 1,viewHeight() * 0.75);
+
+    
+    tileContainer.container.scale.set(app.screen.width/DEF_WIDTH);
+
 
     app.renderer.resize(viewWidth(),viewHeight());
     
@@ -69,28 +79,39 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
     if(viewWidth() >= 1000){
       tileContainer.container.scale.set(1);
       controllerContainer.container.scale.set(0.8);
-      arrowContainer.container.x -= 300 
-      buttonContainer.container.x += 300
+      arrowContainer.container.x -= 500 
+      buttonContainer.container.x += 500
+      arrowContainer.container.y += 250 
+      buttonContainer.container.y += 250
     }else if(viewWidth() >= 600){
       tileContainer.container.scale.set(0.8);
       controllerContainer.container.scale.set(0.5);
       arrowContainer.container.x -= 500
       buttonContainer.container.x += 500
+      arrowContainer.container.y += 250 
+      buttonContainer.container.y += 250
     }else{
-      tileContainer.container.scale.set(1.2);
-      controllerContainer.container.scale.set(2);
+      tileContainer.container.scale.set(0.5);
+      controllerContainer.container.scale.set(0.8);
       arrowContainer.container.x -= 200
       buttonContainer.container.x += 150
-      arrowContainer.container.y += 300
-      buttonContainer.container.y += 300
+      arrowContainer.container.y +=80
+      buttonContainer.container.y += 80
+      
     }
 
   })
+
+
   
+
   /**
    * PIXIキャンバスの生成
    */
   export const app = App.createApp();
+
+
+
  /**
    * 背景図形の生成
    */
@@ -119,8 +140,8 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
    * キャンバスへ追加
    */
   const tileContainer = new TileContainer();
-  tileContainer.container.pivot.set(0.5);
-  tileContainer.container.x = app.screen.width/2;
+  // tileContainer.container.pivot.set(0.5);  
+  // tileContainer.container.x = app.screen.width/2;
   app.stage.addChild(tileContainer.container);
 
   /**
@@ -165,8 +186,8 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
 
   controllerContainer.container.x = app.screen.width/2;
   controllerContainer.container.y = app.screen.height/1.8;
-  arrowContainer.container.x -= 300
-  buttonContainer.container.x += 250
+  arrowContainer.container.x -= 500
+  buttonContainer.container.x += 500
   
 
   arrowContainer.container.alpha = 0.5;
@@ -234,5 +255,3 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
     }
     key.setStatus(key.code,false);
   })
-
-
