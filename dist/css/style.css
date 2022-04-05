@@ -1,11 +1,30 @@
 body {
   margin:0;
   padding:0;
-  /* background-color: #F2E0DC; */
+  background-color: #F2E0DC;
+  font-family: 'M PLUS 2', sans-serif;
 }
 
-canvas {
-  display:block;
+h1 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  color: #03588C;
+  font-size: 56px;
+  text-shadow: 0px 6px rgba(242,142,22,.8);
+  user-select: none;
+}
+
+h2 {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: 0;
+  color: #F28F16;
 }
 
 canvas {

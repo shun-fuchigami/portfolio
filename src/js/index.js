@@ -2,13 +2,16 @@ import * as PIXI from 'pixi.js';
 import { App } from './app/App.js';
 import { Tile } from './sprite/Tile.js';
 import { Hero } from './sprite/Hero.js';
+import { Icon } from './sprite/Icon.js';
 import { Key } from './key/Key.js';
 import { Controller } from './sprite/controller/Controller.js';
 import { BackGroundGraphics } from './graphics/BackGroundGraphics.js';
+import { ContainerHitArea } from './graphics/ContainerHitArea.js';
 import { TileContainer } from './container/TileContainer.js';
 import { TILE_MAP_SIZE,viewWidth,viewHeight, TILE_HEIGHT, TILE_WIDTH} from './config.js' 
 import { ButtonContainer } from './container/Controller/ButtonContainer.js';
 import { ArrowContainer } from './container/Controller/ArrowContainer.js';
+import { Graphics } from 'pixi.js';
 
 
 /**
@@ -79,19 +82,56 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
   const tileContainer = new TileContainer();
   app.stage.addChild(tileContainer.container);
 
+
   /**
    * タイルスプライトの生成・コンテナ追加
    */
   for (let i = 0; i < TILE_MAP_SIZE; i++){
     for (let j = 0; j < TILE_MAP_SIZE; j++){
       let tile = new Tile(i,j);
-      tile.initTile();
       tileContainer.addSprite(tile);
-      tileContainer.setTile(tile);
+      tileContainer.container.addChild(tile.lineSprite);
+      tileContainer.pushTileMap(tile);
     }
   }
 
-  tileContainer.setTileHitArea();
+  /**
+   * コンテナーのヒットエリア生成
+   * タイルの4角が頂点
+   */
+
+   const containerHitArea = new ContainerHitArea(tileContainer.createPolygon());
+   
+
+
+   let a = new PIXI.Graphics();
+  //  a.beginFill(0x000000);
+  // a.lineStyle(5,0xF25260,1,0);
+  // a.drawPolygon(
+  //   new PIXI.Point(tileContainer.getTile(0,0).cornerTop.x , tileContainer.getTile(0,0).cornerTop.y),
+  //  new PIXI.Point(tileContainer.getTile(9,0).cornerRight.x , tileContainer.getTile(9,0).cornerRight.y),
+  //  new PIXI.Point(tileContainer.getTile(9,9).cornerBottom.x , tileContainer.getTile(9,9).cornerBottom.y),
+  //  new PIXI.Point(tileContainer.getTile(0,9).cornerLeft.x , tileContainer.getTile(0,9).cornerLeft.y),
+  //  )
+  //  a.endFill();
+
+  //  tileContainer.container.addChild(a)
+
+
+    /**
+   * アイコンスプライトの生成
+   * 初期位置へ配置
+   * タイルコンテナでアイコンスプライトを保持
+   */
+
+     const aboutIcon = new Icon("about");
+     aboutIcon.sprite.position.set(
+       tileContainer.getTilePosition(0,7,"x"),
+       tileContainer.getTilePosition(0,7,"y")
+     )
+     tileContainer.OBJECT_MAP.push(aboutIcon);
+     tileContainer.addSprite(aboutIcon);
+  
 
   /**
    * ヒーロースプライトの生成
@@ -160,6 +200,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
    */
   const key = new Key();
 
+
 /**
  * イベントリスナー
  */
@@ -169,7 +210,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
    */
    window.addEventListener('load',()=>{
       
-    if(viewWidth() >= 1028){
+  if(viewWidth() >= 1028){
       resize(0.9)
     }else if(viewWidth() >= 800){
       resize(0.8)
@@ -243,43 +284,77 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
         })
     })
     
+
+    // let b = new PIXI.Graphics();
+    // tileContainer.container.addChild(b); 
+
+    // b.beginFill(0x000000);
+    // b.drawCircle(hero.sprite.x,hero.sprite.y - TILE_HEIGHT *1.5,1) 
+    // b.endFill();  
+    // b.beginFill(0xffffff);
+    // b.drawCircle(aboutIcon.sprite.x,aboutIcon.sprite.y - TILE_HEIGHT *1.5,10) 
+    // b.endFill();  
+
   /**
    * アニメーションループ
    */
-
    app.ticker.add((dt)=>{
     
+    /**
+     * アイコンスプライトのアニメーション開始
+     */
+    aboutIcon.sprite.play();
+
+    /**
+     * ヒーロースプライト・アイコンスプライトの位置の更新
+     */
+    hero.initPoint();
+    aboutIcon.initPoint();    
+
+    /**
+     * ヒーロースプライト・アイコンスプライトのタイル位置更新
+     */
+    try {
+      tileContainer.setOnIconTile(aboutIcon);
+      tileContainer.setOnHeroTile(hero);
+    } catch (e) {
+      console.log(e)
+    }
+
+    /**
+     * 移動処理
+     */
     if(key.isKeyDown && key.isFirst){
       hero.setDirection(key.code);
 
     }else if(key.isKeyDown && !(key.isFirst)){
 
-      let nextX = hero.getNextFramePosition(key.code)["x"];
-      let nextY = hero.getNextFramePosition(key.code)["y"];
-      let nextTile = tileContainer.getCurrentTile(nextX,nextY); 
-
-      console.log(nextTile)
-      
-      if(nextTile==null){
+      if( !containerHitArea.checkContains(hero) ||
+           tileContainer.getTile(hero.tileX,hero.tileY).onIcon 
+        ){
         hero.sprite.stop();
+        hero.moveReset(hero.direction);
         hero.initSpriteFrame();  
         key.initStatus();
+      }else{
+        hero.move(hero.direction)
+        hero.sprite.play()
       }
-      hero.move(key.code)
-      hero.sprite.play()
 
     }else {
       hero.sprite.stop();
       hero.initSpriteFrame();
     }
 
-    try {
-      tileContainer.checkOnHeroTile(hero);
-    } catch (error) {
+    /**
+     * ヒーロースプライトの方向に応じて次のタイルをハイライト
+     */
 
-    }
+     tileContainer.highLightTile(hero.getNextTile().x,hero.getNextTile().y);
+
   });
 
+  
 
 
 
