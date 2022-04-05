@@ -16,7 +16,7 @@ export class Key{
     this.isKeyDown = isKeyDown;
   };
 
-  checkInvalidkey(code){
+  checkArrowKey(code){
     if(code === "ArrowUp" || code === "ArrowDown" || code === "ArrowRight" || code === "ArrowLeft" ){
       return true;
     } else {
@@ -24,4 +24,19 @@ export class Key{
     }
   }
 
+  checkZKey(code){
+  if(code === "KeyZ"){
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  checkXKey(code){
+  if(code === "KeyX"){
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

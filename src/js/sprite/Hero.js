@@ -20,6 +20,8 @@ export class Hero{
     this.sprite.interactive = true;
     this.sprite.animationSpeed = 0.17
     this.point = new PIXI.Point();
+    this.onTile;
+    this.selectTile;
   }
 
   /**
@@ -111,6 +113,10 @@ export class Hero{
     }
   }
 
+  /**
+   * ヒーロースプライトの向く方向の次のタイルの座標を返す
+   * @returns {x:number,y:number}
+   */
   getNextTile(){
     let nextTileX;
     let nextTileY;
@@ -137,6 +143,23 @@ export class Hero{
       return {x:nextTileX,y:nextTileY}
     }
 
+  /**
+   * 引数に渡したタイルをヒーローに保持する
+   * @param {Tile} tile 
+   */
+  setOnTile(tile){
+    this.onTile = tile;
+    this.tileX = tile.tileX;
+    this.tileY = tile.tileY;
+  }
+
+  /**
+   * 引数に渡したタイル（選択状態のタイル）をヒーロに保持する
+   * @param {Tile} tile 
+   */
+  setSelectTile(tile){
+    this.selectTile = tile;
+  }
 }
 
 

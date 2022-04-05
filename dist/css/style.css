@@ -5,7 +5,7 @@ body {
   font-family: 'M PLUS 2', sans-serif;
 }
 
-h1 {
+.room h1 {
   position: absolute;
   left: 0;
   right: 0;
@@ -17,16 +17,27 @@ h1 {
   user-select: none;
 }
 
-h2 {
-  position: absolute;
-  top: 56px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  margin: 0;
-  color: #F28F16;
+.room canvas {
+  margin: 24px auto 0;
 }
 
-canvas {
-  margin: 24px auto 0;
+.container{
+  margin: 40px 5%;
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.container.show{
+  opacity: 1;
+  transition: opacity .3s;
+}
+
+
+.about{
+  display: block;
+  border-radius: 12px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0,.5);
+  background-color: #038C7F;
+  padding: 64px;
+  color: #F2E0DC;
 }

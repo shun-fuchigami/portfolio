@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import { BaseContainer } from './BaseContainer';
 import { app } from '../index.js';
 import { TILE_WIDTH,TILE_HEIGHT } from '../config';
+
 /**
  * ヒーロー・タイル・アイテムを管理するコンテナクラス
  */
@@ -27,6 +28,9 @@ export class TileContainer extends BaseContainer{
 
   }
 
+  /**
+   * タイルコンテナ位置の初期化
+   */
   initPosition(){
     this.container.x = app.screen.width/2;
     this.container.y = app.screen.height/4;
@@ -41,7 +45,7 @@ export class TileContainer extends BaseContainer{
   }
 
   /**
-   * @param {number } tileX 
+   * @param {number} tileX 
    * @param {number} tileY 
    * @returns 座標に応じたタイルクラスを返す
    */
@@ -52,25 +56,11 @@ export class TileContainer extends BaseContainer{
     return tile;
   }
 
-    /**
-   * 指定したx,yのローカル座標（タイルコンテナ内の座標）を引数に該当タイルを返す
-   * @param {*} x 
-   * @param {*} y 
-   * @returns タイル 
-   */
-  getCurrentTile(x,y){
-    let tile = this.TILE_MAP.find((tile)=>{
-      return tile.hitArea["x"].includes(x) && tile.hitArea["y"].includes(y);
-    })
-      return tile;
-    }
-  
-
   /**
    * 指定した座標のタイルのxもしくはyのローカル座標を返す
-   * @param {*} tileX 
-   * @param {*} tileY 
-   * @param {*} type "x" or "y" 
+   * @param {number} tileX 
+   * @param {number} tileY 
+   * @param {string} type "x" or "y" 
    * @returns 
    */
   getTilePosition(tileX,tileY,type="x"){
@@ -88,9 +78,9 @@ export class TileContainer extends BaseContainer{
 
   /**
    * 指定した座標のタイルのxもしくはyのグローバル座標の値を取得
-   * @param {*} tileX 
-   * @param {*} tileY 
-   * @param {*} type "x" or "y" 
+   * @param {number} tileX 
+   * @param {number} tileY 
+   * @param {string} type "x" or "y" 
    * @returns 
    */
   getTileGlobalPosition(tileX,tileY,type="x"){
@@ -107,24 +97,36 @@ export class TileContainer extends BaseContainer{
   }
 
   /**
-   * ヒーロの乗るタイルに対しフラグをセット
-   * @param {*} hero 
+   * ヒーローの乗るタイルに対しフラグをセット
+   * ヒーローの向く方向に応じてヒーローに選択中のタイルをセット
+   * @param {Hero} hero 
    */
    setOnHeroTile(hero){
+
     this.TILE_MAP.forEach(tile=>{
       tile.onHero = false;
-      if(tile.getHitAreaContains(hero) === false){
+      if(!tile.getHitAreaContains(hero)){
         return;
       }
       tile.onHero = true;
-      hero.tileX = tile.tileX;
-      hero.tileY = tile.tileY;
-    })
-  }
+      hero.setOnTile(tile);
+    });
+
+    this.TILE_MAP.forEach(tile=>{
+      if(hero.getNextTile().x === tile.tileX &&
+        hero.getNextTile().y === tile.tileY ){
+
+          hero.setSelectTile(tile);
+
+      } else {
+        return;
+      }
+    });
+   }
 
   /**
    * アイコンの乗るタイルに対しフラグをセット
-   * @param {*} icon 
+   * @param {Icon} icon 
    */
    setOnIconTile(icon){
     this.TILE_MAP.forEach(tile=>{
@@ -151,7 +153,11 @@ export class TileContainer extends BaseContainer{
     return polygon;
   }
 
-
+  /**
+   * 引数で指定したタイルのラインの表示/非表示を行う
+   * @param {number} tileX 
+   * @param {number} tileY 
+   */
   highLightTile(tileX,tileY){
     this.TILE_MAP.forEach(tile=>{
       if(tile.tileX === tileX && tile.tileY === tileY){

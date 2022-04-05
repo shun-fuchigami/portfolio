@@ -101,22 +101,6 @@ import { Graphics } from 'pixi.js';
    */
 
    const containerHitArea = new ContainerHitArea(tileContainer.createPolygon());
-   
-
-
-   let a = new PIXI.Graphics();
-  //  a.beginFill(0x000000);
-  // a.lineStyle(5,0xF25260,1,0);
-  // a.drawPolygon(
-  //   new PIXI.Point(tileContainer.getTile(0,0).cornerTop.x , tileContainer.getTile(0,0).cornerTop.y),
-  //  new PIXI.Point(tileContainer.getTile(9,0).cornerRight.x , tileContainer.getTile(9,0).cornerRight.y),
-  //  new PIXI.Point(tileContainer.getTile(9,9).cornerBottom.x , tileContainer.getTile(9,9).cornerBottom.y),
-  //  new PIXI.Point(tileContainer.getTile(0,9).cornerLeft.x , tileContainer.getTile(0,9).cornerLeft.y),
-  //  )
-  //  a.endFill();
-
-  //  tileContainer.container.addChild(a)
-
 
     /**
    * アイコンスプライトの生成
@@ -200,100 +184,117 @@ import { Graphics } from 'pixi.js';
    */
   const key = new Key();
 
-
 /**
  * イベントリスナー
  */
+
 
   /**
    * ロード・リサイズ
    */
    window.addEventListener('load',()=>{
-      
-  if(viewWidth() >= 1028){
-      resize(0.9)
-    }else if(viewWidth() >= 800){
-      resize(0.8)
-    }else{
-      resize(0.5)
-    }
-  })
-
-  window.addEventListener('resize',()=>{
-    
+  
     if(viewWidth() >= 1028){
-      resize(0.9)
-    }else if(viewWidth() >= 800){
-      resize(0.8)
-    }else{
-      resize(0.5)
-    }
-  })
-
-  /**
-   * キーボード操作
-   */
-    /**
-     * コードから仮想コントローラのボタンを返す
-     * @param {String} code 
-     * @returns 
-     */
-    function getButton(code){
-      let button = buttons.find((button)=>{
-        return button.code === code;
-      })
-      return button;
-    }
-
-     document.addEventListener('keydown',(e)=>{
-      e.preventDefault();
-      if(key.checkInvalidkey(e.code) === false){
-        return;
+        resize(0.9)
+      }else if(viewWidth() >= 800){
+        resize(0.8)
+      }else{
+        resize(0.5)
       }
-      getButton(e.code).sprite.alpha = 1;
-      key.setStatus(e.code,true);
-    });
-    
-    document.addEventListener('keyup',(e)=>{
-      e.preventDefault();
-      if(key.checkInvalidkey(e.code) === false){
-        return;
-      }
-      getButton(e.code).sprite.alpha = 0.5;
-      key.setStatus(key.code,false);
     })
+  
+    window.addEventListener('resize',()=>{
+      
+      if(viewWidth() >= 1028){
+        resize(0.9)
+      }else if(viewWidth() >= 800){
+        resize(0.8)
+      }else{
+        resize(0.5)
+      }
+    })
+  
+    /**
+     * キーボード操作
+     */
+      /**
+       * コードから仮想コントローラの対応ボタンを返す
+       * @param {string} code 
+       * @returns 
+       */
+      function getButton(code){
+        let button = buttons.find((button)=>{
+          return button.code === code;
+        })
+        return button;
+      }
+  
+      /**
+       * キーが押下された場合
+       */
+       document.addEventListener('keydown',(e)=>{
+        e.preventDefault();
+  
+        if(key.checkArrowKey(e.code)){
+          getButton(e.code).sprite.alpha = 1;
+          key.setStatus(e.code,true);
 
-  /**
-   * 仮想コントローラー操作
-   */
-    buttons.forEach((button)=>{
-      button.sprite.on('pointerdown',(e)=>{
-        if(key.checkInvalidkey(button.code) === false){
-            return;
+        }else if (key.checkZKey(e.code)){
+
+          if(hero.selectTile.onIcon){
+            document.querySelector(".container").classList.toggle("show");
+          }
+          
+        }else if (key.checkXKey(e.code)){
+  
+        }else{
+          return;
         }
+      });
+      
+      /**
+       * キーの押下が終了した場合
+       */
+      document.addEventListener('keyup',(e)=>{
+        e.preventDefault();
+        if(key.checkArrowKey(e.code)){
+          getButton(e.code).sprite.alpha = 0.5;
+          key.setStatus(key.code,false);
+        }else{
+          return;
+        }
+      });
+  
+  
+    /**
+     * 仮想コントローラー操作
+     * ボタン配列をループしてイベントを追加
+     */
+      
+    buttons.forEach((button)=>{
+      
+      /**
+       * ボタンが押下された場合
+       */
+      button.sprite.on('pointerdown',(e)=>{
+        if(key.checkArrowKey(button.code)){
           button.sprite.alpha = 1;
           key.setStatus(button.code,true);
-        })
-        
-        button.sprite.on('pointerup',(e)=>{
-          if(key.checkInvalidkey(button.code) === false){
-            return;
-          }
+        }
+      })
+
+      /**
+       * ボタンの押下が終了した場合
+       */ 
+      button.sprite.on('pointerup',(e)=>{
+        if(key.checkArrowKey(button.code)){
           button.sprite.alpha = 0.5;
           key.setStatus(button.code,false);
-        })
-    })
-    
+        }
+      })
 
-    // let b = new PIXI.Graphics();
-    // tileContainer.container.addChild(b); 
+      })
 
-    // b.beginFill(0x000000);
-    // b.drawCircle(hero.sprite.x,hero.sprite.y - TILE_HEIGHT *1.5,1) 
-    // b.endFill();  
-    // b.beginFill(0xffffff);
-    // b.drawCircle(aboutIcon.sprite.x,aboutIcon.sprite.y - TILE_HEIGHT *1.5,10) 
-    // b.endFill();  
 
   /**
    * アニメーションループ
@@ -314,47 +315,60 @@ import { Graphics } from 'pixi.js';
     /**
      * ヒーロースプライト・アイコンスプライトのタイル位置更新
      */
-    try {
-      tileContainer.setOnIconTile(aboutIcon);
-      tileContainer.setOnHeroTile(hero);
-    } catch (e) {
-      console.log(e)
-    }
+    tileContainer.setOnIconTile(aboutIcon);
+    tileContainer.setOnHeroTile(hero);
 
     /**
      * 移動処理
      */
-    if(key.isKeyDown && key.isFirst){
-      hero.setDirection(key.code);
 
-    }else if(key.isKeyDown && !(key.isFirst)){
+      /**
+       * キー1回目の押下
+       * ヒーロースプライトの方向をセット
+       */
+      if(key.isKeyDown && key.isFirst){
+        hero.setDirection(key.code);
 
-      if( !containerHitArea.checkContains(hero) ||
-           tileContainer.getTile(hero.tileX,hero.tileY).onIcon 
-        ){
+      /**
+       * キー2回目以降の押下
+       * ヒーロースプライトの向く方向へ移動
+       */
+      }else if(key.isKeyDown && !(key.isFirst)){
+
+        if( !containerHitArea.checkContains(hero) ||
+            tileContainer.getTile(hero.tileX,hero.tileY).onIcon 
+          ){
+          hero.sprite.stop();
+          hero.moveReset(hero.direction);
+          hero.initSpriteFrame();  
+          key.initStatus();
+        }else{
+          hero.move(hero.direction)
+          hero.sprite.play()
+        }
+
+      /**
+       * キーが押下されていない場合
+       * 移動を止める
+       */
+      }else {
         hero.sprite.stop();
-        hero.moveReset(hero.direction);
-        hero.initSpriteFrame();  
-        key.initStatus();
-      }else{
-        hero.move(hero.direction)
-        hero.sprite.play()
+        hero.initSpriteFrame();
       }
-
-    }else {
-      hero.sprite.stop();
-      hero.initSpriteFrame();
-    }
 
     /**
      * ヒーロースプライトの方向に応じて次のタイルをハイライト
      */
-
-     tileContainer.highLightTile(hero.getNextTile().x,hero.getNextTile().y);
-
+    try{
+      tileContainer.highLightTile(hero.selectTile.tileX, hero.selectTile.tileY)
+    }catch (e){
+      /**
+       * 何もしない
+       */
+    }
+  
   });
 
-  
 
 
 

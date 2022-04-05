@@ -51,10 +51,19 @@ export class Tile{
     this.sprite.hitArea = this.polygon;
   }
 
+  /**
+   * 引数に渡したオブジェクトがヒットエリア内かどうかを判定
+   * @param {*} object 
+   * @returns boolean
+   */
   getHitAreaContains(object){
     return this.sprite.hitArea.contains(object.point.x , object.point.y);
   }
 
+  /**
+   * タイルハイライト用の図形の生成・返却
+   * @returns PIXI.Graphics
+   */
   createLineSprite(){
     let rect = new PIXI.Graphics();
     rect.lineStyle(3,0xF25260,0.5,1);
@@ -63,6 +72,10 @@ export class Tile{
     return rect;
   }
 
+  /**
+   * タイル上面の図形を生成・返却
+   * @returns 
+   */
   createPolygon(){
     let polygon = new PIXI.Polygon(
       new PIXI.Point(this.cornerTop.x , this.cornerTop.y),
@@ -73,6 +86,10 @@ export class Tile{
     return polygon;
   }
   
+  /**
+   * タイルハイライト用の図形の表示/非表示をセット
+   * @param {*} boolean 
+   */
   setVisibleLine(boolean = true){
     this.lineSprite.visible = boolean;
   }
