@@ -48,6 +48,31 @@ import { Graphics } from 'pixi.js';
   }
 
 
+  /**
+   * ロード・リサイズ
+   */
+   window.addEventListener('load',()=>{
+  
+    if(viewWidth() >= 1028){
+        resize(0.9)
+      }else if(viewWidth() >= 800){
+        resize(0.8)
+      }else{
+        resize(0.4)
+      }
+    })
+  
+    window.addEventListener('resize',()=>{
+      
+      if(viewWidth() >= 1028){
+        resize(0.9)
+      }else if(viewWidth() >= 800){
+        resize(0.8)
+      }else{
+        resize(0.4)
+      }
+    })
+  
 
 /**
  * メイン処理
@@ -197,32 +222,6 @@ import { Graphics } from 'pixi.js';
  * イベントリスナー
  */
 
-
-  /**
-   * ロード・リサイズ
-   */
-   window.addEventListener('load',()=>{
-  
-    if(viewWidth() >= 1028){
-        resize(0.9)
-      }else if(viewWidth() >= 800){
-        resize(0.8)
-      }else{
-        resize(0.5)
-      }
-    })
-  
-    window.addEventListener('resize',()=>{
-      
-      if(viewWidth() >= 1028){
-        resize(0.9)
-      }else if(viewWidth() >= 800){
-        resize(0.8)
-      }else{
-        resize(0.5)
-      }
-    })
-  
     /**
      * キーボード操作
      */
