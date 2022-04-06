@@ -1,6 +1,6 @@
 // 出力は絶対pathで指定しなければいけない為、node.jsのpathモジュールを使用する
 const path = require('path');
-const outputPath = path.resolve(__dirname, 'dist');
+const outputPath = path.resolve(__dirname, 'docs');
 
 module.exports = {
     // バンドルするファイルを指定
