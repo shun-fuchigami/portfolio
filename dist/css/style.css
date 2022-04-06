@@ -6,7 +6,7 @@ body {
 }
 
 .room h1 {
-  position: absolute;
+  /* position: absolute; */
   left: 0;
   right: 0;
   margin: 0;
@@ -22,6 +22,9 @@ body {
 }
 
 .container{
+  position: absolute;
+  left: 0;
+  right: 0;
   margin: 40px 5%;
   opacity: 0;
   transition: opacity .3s;
@@ -32,12 +35,11 @@ body {
   transition: opacity .3s;
 }
 
-
 .about{
   display: block;
   border-radius: 12px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0,.5);
-  background-color: #038C7F;
+  background-color: rgba(3, 140, 127, .9);
   padding: 64px;
   color: #F2E0DC;
 }

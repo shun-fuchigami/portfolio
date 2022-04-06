@@ -115,6 +115,15 @@ import { Graphics } from 'pixi.js';
      )
      tileContainer.OBJECT_MAP.push(aboutIcon);
      tileContainer.addSprite(aboutIcon);
+
+
+     const careerIcon = new Icon("career");
+     careerIcon.sprite.position.set(
+       tileContainer.getTilePosition(0,3,"x"),
+       tileContainer.getTilePosition(0,3,"y")
+     )
+     tileContainer.OBJECT_MAP.push(careerIcon);
+     tileContainer.addSprite(careerIcon);
   
 
   /**
@@ -249,7 +258,7 @@ import { Graphics } from 'pixi.js';
   
         }else{
           return;
-        }
+        };
       });
       
       /**
@@ -262,7 +271,7 @@ import { Graphics } from 'pixi.js';
           key.setStatus(key.code,false);
         }else{
           return;
-        }
+        };
       });
   
   
@@ -281,7 +290,7 @@ import { Graphics } from 'pixi.js';
           button.sprite.alpha = 1;
           key.setStatus(button.code,true);
         }
-      })
+      });
 
       /**
        * ボタンの押下が終了した場合
@@ -291,9 +300,8 @@ import { Graphics } from 'pixi.js';
           button.sprite.alpha = 0.5;
           key.setStatus(button.code,false);
         }
-      })
-
-      })
+      });
+    });
 
 
   /**
@@ -305,6 +313,7 @@ import { Graphics } from 'pixi.js';
      * アイコンスプライトのアニメーション開始
      */
     aboutIcon.sprite.play();
+    careerIcon.sprite.play();
 
     /**
      * ヒーロースプライト・アイコンスプライトの位置の更新
@@ -361,7 +370,8 @@ import { Graphics } from 'pixi.js';
      */
     try{
       tileContainer.highLightTile(hero.selectTile.tileX, hero.selectTile.tileY)
-    }catch (e){
+    }catch{
+      return;
       /**
        * 何もしない
        */
