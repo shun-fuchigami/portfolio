@@ -1,13 +1,25 @@
+
 body {
-  margin:0;
+  margin: 0;
   padding:0;
-  /* background-color: #F2E0DC; */
   background-color: #f2f2f2;
   font-family: 'M PLUS 2', sans-serif;
 }
 
-.room h1 {
+h1 {
   margin: 0;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.room {
+  outline: 1px solid blue;
+}
+
+.room h1 {
   text-align: center;
   color: #03588C;
   font-size: 56px;
@@ -15,33 +27,72 @@ body {
   user-select: none;
 }
 
-.room canvas {
-  margin: 24px auto 0;
+.room nav {
+  text-align: center;
+  margin-bottom: 8px; 
 }
 
-.container{
+.room button {
+  font-size: 24px;
+  font-weight: bold;
+  /* outline: 1px solid red; */
+  margin: 0;
+  padding: 4px 16px;
+  border: none;
+  border-radius: 4px;
+  color: #03588C;
+  background-color: rgba(0,0,0,.05);
+  cursor: pointer;
+  user-select: none;
+}
+
+.room button:hover{
+  opacity: .5;
+}
+
+
+.room dl {
+  display: block;
+  width: 300px;
+  padding: 16px;
+  margin: 0 auto;
+  outline: 1px solid red;
+}
+
+.how-to-container,
+.about-container{
   user-select: none;
   opacity: 0;
+  transition: opacity .3s;
   z-index: -1;
+
   position: absolute;
   left: 0;
   right: 0;
-  margin: 56px 5%;
-  transition: opacity .3s;
-}
 
-.container.show{
-  user-select: auto;
-  opacity: 1;
-  z-index: 0;
-  transition: opacity .3s;
-}
-
-.about{
-  display: block;
+  background-color: rgba(255,255,255,.9);
   border-radius: 12px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0,.5);
-  background-color: rgba(3, 140, 127, .9);
-  padding: 64px;
-  color: #F2E0DC;
+  outline: 1px solid red;
+  padding: 16px 32px;
+  margin: 56px auto;
 }
+
+.how-to-container {
+  width: 400px;
+}
+
+.about-container {
+  width: 80%;
+}
+
+.how-to-container.show,
+.about-container.show{
+  user-select: auto;
+  opacity: 1;
+  transition: opacity .3s;
+  z-index: 0;
+}
+
+
+

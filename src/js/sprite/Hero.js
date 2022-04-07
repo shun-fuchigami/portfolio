@@ -13,7 +13,8 @@ export class Hero{
     this.textures = LoaderImg.heroTexturesLoad();
     this.tileX = 0;
     this.tileY = 0;
-    this.speed = 2;
+    this.speed = 4;
+    this.backSpeed = TILE_HEIGHT;
     this.direction = "ArrowDown";
     this.sprite = new PIXI.AnimatedSprite(this.textures["ArrowDown"]);
     this.sprite.anchor.set(0.5,1);
@@ -80,20 +81,20 @@ export class Hero{
   moveReset(direction){
     switch(direction){
       case "ArrowUp":
-        this.sprite.x -= this.speed * 8;
-        this.sprite.y += this.speed * 4;
+        this.sprite.x -= this.backSpeed;
+        this.sprite.y += this.backSpeed / 2;
         break;
       case "ArrowDown":
-        this.sprite.x += this.speed * 8;
-        this.sprite.y -= this.speed * 4;
+        this.sprite.x += this.backSpeed;
+        this.sprite.y -= this.backSpeed / 2;
         break;
       case "ArrowRight":
-        this.sprite.x -= this.speed * 8;
-        this.sprite.y -= this.speed * 4;
+        this.sprite.x -= this.backSpeed;
+        this.sprite.y -= this.backSpeed / 2;
         break;
       case "ArrowLeft":
-        this.sprite.x += this.speed * 8;
-        this.sprite.y += this.speed * 4;
+        this.sprite.x += this.backSpeed;
+        this.sprite.y += this.backSpeed / 2;
         break;
       default:
         break;

@@ -24,9 +24,9 @@ export class Tile{
     this.sprite.anchor.set(0.5,1);
     this.sprite.interactive = true;
     
-    this.Hero;
+    this.hero;
     this.onHero = false;
-    this.Icon;
+    this.icon;
     this.onIcon = false;
 
     this.cornerTop = {

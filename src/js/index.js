@@ -8,7 +8,7 @@ import { Controller } from './sprite/controller/Controller.js';
 import { BackGroundGraphics } from './graphics/BackGroundGraphics.js';
 import { ContainerHitArea } from './graphics/ContainerHitArea.js';
 import { TileContainer } from './container/TileContainer.js';
-import { TILE_MAP_SIZE,viewWidth,viewHeight, TILE_HEIGHT, TILE_WIDTH} from './config.js' 
+import { TILE_MAP_SIZE,viewWidth,viewHeight, TILE_HEIGHT, TILE_WIDTH, DEF_HEIGHT} from './config.js' 
 import { ButtonContainer } from './container/Controller/ButtonContainer.js';
 import { ArrowContainer } from './container/Controller/ArrowContainer.js';
 
@@ -18,7 +18,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
  */ 
 
    function resize(scaleNum){
-    app.renderer.resize(viewWidth(),viewHeight());
+    app.renderer.resize(viewWidth(),DEF_HEIGHT);
     tileContainer.initPosition();
     outerCircle.initGraphics();
     outerCircle.renderOuterCircle();
@@ -26,6 +26,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
     innerCircle.renderInnerCircle();
 
     if(scaleNum > 0.5){ 
+      app.renderer.resize(viewWidth(),DEF_HEIGHT - 200);
       tileContainer.container.scale.set(scaleNum);
       arrowContainer.container.scale.set(scaleNum);
       buttonContainer.container.scale.set(scaleNum);
@@ -34,12 +35,12 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
       arrowContainer.container.y = tileContainer.getTileGlobalPosition(7,9,"y");
       buttonContainer.container.y = tileContainer.getTileGlobalPosition(7,9,"y");
     }else{
-      app.renderer.resize(viewWidth(),viewHeight()-200);
+      app.renderer.resize(viewWidth(),DEF_HEIGHT - 400);
       tileContainer.container.scale.set(scaleNum);
       arrowContainer.container.scale.set(scaleNum + 0.2);
       buttonContainer.container.scale.set(scaleNum + 0.2);
-      arrowContainer.container.x = tileContainer.getTileGlobalPosition(0,7,"x");
-      buttonContainer.container.x = tileContainer.getTileGlobalPosition(7,0,"x");
+      arrowContainer.container.x = tileContainer.getTileGlobalPosition(0,6,"x");
+      buttonContainer.container.x = tileContainer.getTileGlobalPosition(6,0,"x");
       arrowContainer.container.y = tileContainer.getTileGlobalPosition(9,9,"y");
       buttonContainer.container.y = tileContainer.getTileGlobalPosition(9,9,"y");
     }
@@ -239,6 +240,15 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
  */
 
     /**
+     * 操作説明ボタンが押された場合
+     */
+
+    document.querySelector(".room button").addEventListener("click",()=>{
+      document.querySelector(".how-to-container").classList.toggle("show");
+    });
+    
+
+    /**
      * キーボード操作
      */
       /**
@@ -266,7 +276,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
         }else if (key.checkZKey(e.code)){
           getButton(e.code).sprite.alpha = 1;
           if(hero.selectTile.onIcon){
-            document.querySelector(".container").classList.toggle("show");
+            document.querySelector(`.${hero.selectTile.icon.name}-container`).classList.toggle("show");
           }
           
         }else if (key.checkXKey(e.code)){
@@ -309,7 +319,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
         }else if (key.checkZKey(button.code)){
           getButton(button.code).sprite.alpha = 1;
           if(hero.selectTile.onIcon){
-            document.querySelector(".container").classList.toggle("show");
+            document.querySelector(`.${hero.selectTile.icon.name}-container`).classList.toggle("show");
           }
           
         }else if (key.checkXKey(button.code)){

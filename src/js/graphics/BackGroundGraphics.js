@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import { DEF_HEIGHT } from '../config.js';
 import {app} from '../index.js'
 
 export class BackGroundGraphics {
@@ -12,9 +13,9 @@ export class BackGroundGraphics {
   initGraphics(){
     this.graphics.clear();
     this.x = app.screen.width / 2;
-    this.y = app.screen.height;
+    this.y = DEF_HEIGHT;
     this.width = app.screen.width;
-    this.height = app.screen.height;
+    this.height = DEF_HEIGHT;
   }
 
   renderInnerCircle(){

@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { BaseContainer } from './BaseContainer';
 import { app } from '../index.js';
-import { TILE_WIDTH,TILE_HEIGHT } from '../config';
+import { TILE_WIDTH,TILE_HEIGHT, DEF_HEIGHT } from '../config';
 
 /**
  * ヒーロー・タイル・アイテムを管理するコンテナクラス
@@ -33,7 +33,7 @@ export class TileContainer extends BaseContainer{
    */
   initPosition(){
     this.container.x = app.screen.width/2;
-    this.container.y = app.screen.height/4;
+    this.container.y = DEF_HEIGHT / 5;
   }
 
   /**
@@ -132,6 +132,7 @@ export class TileContainer extends BaseContainer{
     this.TILE_MAP.forEach(tile=>{
       if(tile.getHitAreaContains(icon)){
         tile.onIcon = true;
+        tile.icon = icon;
       }
     })
   }
