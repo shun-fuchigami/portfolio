@@ -13,7 +13,8 @@ export class Hero{
     this.textures = LoaderImg.heroTexturesLoad();
     this.tileX = 0;
     this.tileY = 0;
-    this.speed = 4;
+    // this.speed = 4;
+    this.speed = 8;
     this.backSpeed = TILE_HEIGHT;
     this.direction = "ArrowDown";
     this.sprite = new PIXI.AnimatedSprite(this.textures["ArrowDown"]);

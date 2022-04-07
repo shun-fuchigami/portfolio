@@ -138,7 +138,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
        tileContainer.getTilePosition(0,7,"x"),
        tileContainer.getTilePosition(0,7,"y")
      )
-     tileContainer.OBJECT_MAP.push(aboutIcon);
+     tileContainer.ICON_MAP.push(aboutIcon);
      tileContainer.addSprite(aboutIcon);
 
 
@@ -147,7 +147,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
        tileContainer.getTilePosition(0,3,"x"),
        tileContainer.getTilePosition(0,3,"y")
      )
-     tileContainer.OBJECT_MAP.push(careerIcon);
+     tileContainer.ICON_MAP.push(careerIcon);
      tileContainer.addSprite(careerIcon);
 
      
@@ -156,7 +156,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
        tileContainer.getTilePosition(3,0,"x"),
        tileContainer.getTilePosition(3,0,"y")
      )
-     tileContainer.OBJECT_MAP.push(skillIcon);
+     tileContainer.ICON_MAP.push(skillIcon);
      tileContainer.addSprite(skillIcon);
 
      const galleryIcon = new Icon("gallery");
@@ -164,7 +164,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
        tileContainer.getTilePosition(7,0,"x"),
        tileContainer.getTilePosition(7,0,"y")
      )
-     tileContainer.OBJECT_MAP.push(galleryIcon);
+     tileContainer.ICON_MAP.push(galleryIcon);
      tileContainer.addSprite(galleryIcon);
   
 
@@ -179,7 +179,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
     tileContainer.getTilePosition(9,9,"x"),
     tileContainer.getTilePosition(9,9,"y")
   )
-  tileContainer.OBJECT_MAP.push(hero);
+  tileContainer.HERO_MAP.push(hero);
   tileContainer.addSprite(hero);
 
 
@@ -245,8 +245,19 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
 
     document.querySelector(".room button").addEventListener("click",()=>{
       document.querySelector(".how-to-container").classList.toggle("show");
+      document.querySelector(".how-to-container").classList.toggle("hidden");
     });
     
+    /**
+     * クローズボタンが押された場合
+     */
+    let closeButtons = document.querySelectorAll(".close-button");
+    closeButtons.forEach(button=>{
+      button.addEventListener("click",(e)=>{
+        button.parentElement.classList.toggle("show");
+
+      })
+    })
 
     /**
      * キーボード操作
@@ -276,12 +287,15 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
         }else if (key.checkZKey(e.code)){
           getButton(e.code).sprite.alpha = 1;
           if(hero.selectTile.onIcon){
-            document.querySelector(`.${hero.selectTile.icon.name}-container`).classList.toggle("show");
+            document.querySelector(`.${hero.selectTile.icon.name}-container`).classList.add("show");
           }
           
         }else if (key.checkXKey(e.code)){
           getButton(e.code).sprite.alpha = 1;
-          
+          tileContainer.ICON_MAP.forEach(icon=>{
+            document.querySelector(`.${icon.name}-container`).classList.remove("show");
+          })
+
         }else{
           return;
         };
@@ -299,7 +313,6 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
           return;
         };
       });
-  
   
     /**
      * 仮想コントローラー操作
@@ -319,13 +332,15 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
         }else if (key.checkZKey(button.code)){
           getButton(button.code).sprite.alpha = 1;
           if(hero.selectTile.onIcon){
-            document.querySelector(`.${hero.selectTile.icon.name}-container`).classList.toggle("show");
+            document.querySelector(`.${hero.selectTile.icon.name}-container`).classList.add("show");
           }
           
         }else if (key.checkXKey(button.code)){
           getButton(button.code).sprite.alpha = 1;
+          tileContainer.ICON_MAP.forEach(icon=>{
+            document.querySelector(`.${icon.name}-container`).classList.remove("show");
+          })
 
-  
         }else{
           return;
         };

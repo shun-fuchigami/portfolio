@@ -24,7 +24,12 @@ export class TileContainer extends BaseContainer{
     /**
      * ヒーロー・アイテムスプライトを保持する配列
      */
-    this.OBJECT_MAP = [];
+    this.HERO_MAP = [];
+
+    /**
+     * ヒーロー・アイテムスプライトを保持する配列
+     */
+    this.ICON_MAP = [];
 
   }
 
