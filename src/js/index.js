@@ -11,7 +11,6 @@ import { TileContainer } from './container/TileContainer.js';
 import { TILE_MAP_SIZE,viewWidth,viewHeight, TILE_HEIGHT, TILE_WIDTH} from './config.js' 
 import { ButtonContainer } from './container/Controller/ButtonContainer.js';
 import { ArrowContainer } from './container/Controller/ArrowContainer.js';
-import { Graphics } from 'pixi.js';
 
 
 /**
@@ -37,10 +36,10 @@ import { Graphics } from 'pixi.js';
     }else{
       app.renderer.resize(viewWidth(),viewHeight()-200);
       tileContainer.container.scale.set(scaleNum);
-      arrowContainer.container.scale.set(scaleNum);
-      buttonContainer.container.scale.set(scaleNum);
-      arrowContainer.container.x = tileContainer.getTileGlobalPosition(0,4,"x");
-      buttonContainer.container.x = tileContainer.getTileGlobalPosition(4,0,"x");
+      arrowContainer.container.scale.set(scaleNum + 0.2);
+      buttonContainer.container.scale.set(scaleNum + 0.2);
+      arrowContainer.container.x = tileContainer.getTileGlobalPosition(0,7,"x");
+      buttonContainer.container.x = tileContainer.getTileGlobalPosition(7,0,"x");
       arrowContainer.container.y = tileContainer.getTileGlobalPosition(9,9,"y");
       buttonContainer.container.y = tileContainer.getTileGlobalPosition(9,9,"y");
     }
@@ -127,7 +126,7 @@ import { Graphics } from 'pixi.js';
 
    const containerHitArea = new ContainerHitArea(tileContainer.createPolygon());
 
-    /**
+  /**
    * アイコンスプライトの生成
    * 初期位置へ配置
    * タイルコンテナでアイコンスプライトを保持
@@ -149,6 +148,23 @@ import { Graphics } from 'pixi.js';
      )
      tileContainer.OBJECT_MAP.push(careerIcon);
      tileContainer.addSprite(careerIcon);
+
+     
+     const skillIcon = new Icon("skill");
+     skillIcon.sprite.position.set(
+       tileContainer.getTilePosition(3,0,"x"),
+       tileContainer.getTilePosition(3,0,"y")
+     )
+     tileContainer.OBJECT_MAP.push(skillIcon);
+     tileContainer.addSprite(skillIcon);
+
+     const galleryIcon = new Icon("gallery");
+     galleryIcon.sprite.position.set(
+       tileContainer.getTilePosition(7,0,"x"),
+       tileContainer.getTilePosition(7,0,"y")
+     )
+     tileContainer.OBJECT_MAP.push(galleryIcon);
+     tileContainer.addSprite(galleryIcon);
   
 
   /**
@@ -248,13 +264,14 @@ import { Graphics } from 'pixi.js';
           key.setStatus(e.code,true);
 
         }else if (key.checkZKey(e.code)){
-
+          getButton(e.code).sprite.alpha = 1;
           if(hero.selectTile.onIcon){
             document.querySelector(".container").classList.toggle("show");
           }
           
         }else if (key.checkXKey(e.code)){
-  
+          getButton(e.code).sprite.alpha = 1;
+          
         }else{
           return;
         };
@@ -265,7 +282,7 @@ import { Graphics } from 'pixi.js';
        */
       document.addEventListener('keyup',(e)=>{
         e.preventDefault();
-        if(key.checkArrowKey(e.code)){
+        if(key.checkKey(e.code)){
           getButton(e.code).sprite.alpha = 0.5;
           key.setStatus(key.code,false);
         }else{
@@ -286,16 +303,29 @@ import { Graphics } from 'pixi.js';
        */
       button.sprite.on('pointerdown',(e)=>{
         if(key.checkArrowKey(button.code)){
-          button.sprite.alpha = 1;
+          getButton(button.code).sprite.alpha = 1;
           key.setStatus(button.code,true);
-        }
+
+        }else if (key.checkZKey(button.code)){
+          getButton(button.code).sprite.alpha = 1;
+          if(hero.selectTile.onIcon){
+            document.querySelector(".container").classList.toggle("show");
+          }
+          
+        }else if (key.checkXKey(button.code)){
+          getButton(button.code).sprite.alpha = 1;
+
+  
+        }else{
+          return;
+        };
       });
 
       /**
        * ボタンの押下が終了した場合
        */ 
       button.sprite.on('pointerup',(e)=>{
-        if(key.checkArrowKey(button.code)){
+        if(key.checkKey(button.code)){
           button.sprite.alpha = 0.5;
           key.setStatus(button.code,false);
         }
@@ -313,17 +343,25 @@ import { Graphics } from 'pixi.js';
      */
     aboutIcon.sprite.play();
     careerIcon.sprite.play();
+    skillIcon.sprite.play();
+    galleryIcon.sprite.play();
 
     /**
      * ヒーロースプライト・アイコンスプライトの位置の更新
      */
     hero.initPoint();
-    aboutIcon.initPoint();    
+    aboutIcon.initPoint();
+    careerIcon.initPoint();
+    skillIcon.initPoint();
+    galleryIcon.initPoint();
 
     /**
      * ヒーロースプライト・アイコンスプライトのタイル位置更新
      */
     tileContainer.setOnIconTile(aboutIcon);
+    tileContainer.setOnIconTile(careerIcon);
+    tileContainer.setOnIconTile(skillIcon);
+    tileContainer.setOnIconTile(galleryIcon);
     tileContainer.setOnHeroTile(hero);
 
     /**

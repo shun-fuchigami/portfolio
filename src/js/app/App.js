@@ -11,7 +11,8 @@ export class App{
     const app = new PIXI.Application({
       resolution: window.devicePixelRatio || 1,
       autoDensity: true,
-      backgroundColor: 0xF2E0DC,
+      // backgroundColor: 0xF2E0DC,
+      backgroundColor: 0xf2f2f2,
       width:window.innerWidth,
       height:window.innerHeight,
     });

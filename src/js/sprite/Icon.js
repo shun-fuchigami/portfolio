@@ -6,6 +6,7 @@ import { TILE_HEIGHT, TILE_WIDTH } from '../config.js';
 export class Icon{
   constructor(name){
     this.textures = LoaderImg.iconLoad(name);
+    this.name = name;
     this.tileX = 0;
     this.tileY = 0;
     this.sprite = new PIXI.AnimatedSprite(this.textures);

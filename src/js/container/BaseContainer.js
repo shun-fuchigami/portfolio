@@ -16,4 +16,9 @@ export class BaseContainer {
   addGraphics(instance){
     this.container.addChild(instance.graphics);
   }
+
+  setScale(scale){
+    this.container.scale.set(scale);
+    
+  }
 }

@@ -130,12 +130,9 @@ export class TileContainer extends BaseContainer{
    */
    setOnIconTile(icon){
     this.TILE_MAP.forEach(tile=>{
-      tile.onIcon = false;
-      if(tile.getHitAreaContains(icon) === false){
-        return;
+      if(tile.getHitAreaContains(icon)){
+        tile.onIcon = true;
       }
-      tile.onIcon = true;
-      tile.Icon = icon;
     })
   }
 
@@ -167,5 +164,7 @@ export class TileContainer extends BaseContainer{
       }
     })
   }
+
+
 
 }

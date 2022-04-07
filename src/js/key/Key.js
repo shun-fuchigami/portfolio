@@ -16,6 +16,15 @@ export class Key{
     this.isKeyDown = isKeyDown;
   };
 
+
+  checkKey(code){
+    if(code === "ArrowUp" || code === "ArrowDown" || code === "ArrowRight" || code === "ArrowLeft" || code === "KeyZ" || code === "KeyX"){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   checkArrowKey(code){
     if(code === "ArrowUp" || code === "ArrowDown" || code === "ArrowRight" || code === "ArrowLeft" ){
       return true;
