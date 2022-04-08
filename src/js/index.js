@@ -54,7 +54,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
    window.addEventListener('load',()=>{
   
     if(viewWidth() >= 1028){
-        resize(0.9)
+        resize(0.8)
       }else if(viewWidth() >= 800){
         resize(0.8)
       }else{
@@ -65,7 +65,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
     window.addEventListener('resize',()=>{
       
       if(viewWidth() >= 1028){
-        resize(0.9)
+        resize(0.8)
       }else if(viewWidth() >= 800){
         resize(0.8)
       }else{

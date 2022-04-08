@@ -107,20 +107,6 @@ i {
   font-size: 24px;
 }
 
-.how-to-container dl {
-  padding: 16px 0;
-  margin: 0 auto;
-}
-
-.how-to-container dd {
-  padding-left: 16px;
-}
-
-.how-to-container dd + dt{
-  padding-top: 16px;
-}
-
-
 
 /* container common */
 .how-to-container,
@@ -143,9 +129,10 @@ i {
   overflow-y: scroll;
 }
 
-.how-to-container {  
-  width: 300px;
-  height: 500px;
+.how-to-container{
+  width: 600px;
+  height: 400px;
+
 }
 
 .about-container
@@ -181,7 +168,6 @@ i {
   }
 }
 
-
 /* section  common*/
 .how-to,
 .about,
@@ -193,6 +179,26 @@ i {
   height: 100%;
   margin: 0 auto;
 }
+
+/* how-to section */
+
+.how-to-container h1{
+  font-size: 24px;
+}
+
+.how-to-container dl {
+  padding: 16px 0;
+  margin: 0 auto;
+}
+
+.how-to-container dd {
+  padding-left: 16px;
+}
+
+.how-to-container dd + dt{
+  padding-top: 16px;
+}
+
 
 /* about section */
 
@@ -347,6 +353,7 @@ i {
   }
 }   
 
+.how-to-container,
 .about-container{
   width: 300px;
   height: 500px;
