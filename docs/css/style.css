@@ -289,6 +289,7 @@ i {
   width: 2px;
   height: 8px;
   transform-origin: top center;
+  -webkit-transform-origin: top center;
   animation: drawLine 3.1s ease-out 1.8s forwards;
 }
 
