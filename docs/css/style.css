@@ -288,7 +288,7 @@ i {
   background-color: #F25260;
   width: 2px;
   height: 8px;
-  transform-origin: top center;
+  transform-origin: top;
   animation: drawLine 3.1s ease-out 1.8s forwards;
 }
 
@@ -336,20 +336,37 @@ i {
 .skill .non-icon.ps{color: #03588C;}
 
 
+/* midium screen */
+@media (max-width: 800px) {
+
+
+  .how-to-container,
+  .about-container,
+  .career-container,
+  .skill-container,
+  .gallery-container
+  {
+    padding: 16px 20px;
+    overflow-y: scroll;
+  }
+    
+
+  .how-to-container,
+  .about-container{
+    width: 500px;
+  }
+  
+  .career-container,
+  .skill-container,
+  .gallery-container{
+    width: 500px;
+  }
+    
+  }
+  
 
 /* sp screen */
-@media (max-width: 650px) {
-
-.how-to-container,
-.about-container,
-.career-container,
-.skill-container,
-.gallery-container
-{
-  padding: 16px 20px;
-  overflow-y: scroll;
-}
-  
+@media (max-width: 600px) {
 
 .career .inner-circle:first-of-type::before {
   animation: sp-drawLine 3.1s ease-out 1.8s forwards;
@@ -362,19 +379,38 @@ i {
   to{
     transform: scaleY(82);
   }
-}   
+}
+
+.how-to-container {
+  height: 500px;
+}
 
 .how-to-container,
 .about-container{
   width: 300px;
-  height: 500px;
 }
 
 .career-container,
 .skill-container,
 .gallery-container{
   width: 300px;
-  height: 700px;
 }
   
+}
+
+
+/* safari */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  _::-webkit-full-page-media, _:future, :root .career .inner-circle:first-of-type::before{
+    animation: sp-safari-drawLine 3.1s ease-out 1.8s forwards;
+  }
+
+  @keyframes sp-safari-drawLine {
+    from{
+      transform: scaleY(0);
+    }
+    to{
+      transform: scaleY(84);
+    }
+  }
 }
