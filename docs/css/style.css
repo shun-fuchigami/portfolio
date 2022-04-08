@@ -295,10 +295,10 @@ i {
 
 @keyframes drawLine {
   from{
-    transform: scaleY(0);
+    -webkit-transform: scaleY(0);
   }
   to{
-    transform: scaleY(36);
+    -webkit-transform: scaleY(36);
   }
 }
 
@@ -358,10 +358,10 @@ i {
 
 @keyframes sp-drawLine {
   from{
-    transform: scaleY(0);
+    -webkit-transform: scaleY(0);
   }
   to{
-    transform: scaleY(81);
+    -webkit-transform: scaleY(81);
   }
 }   
 
