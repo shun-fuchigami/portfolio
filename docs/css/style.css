@@ -56,6 +56,7 @@ button {
   font-weight: bold;
 }
 
+
 a:hover:not(h1 a),
 button:hover{
   opacity: .5;
@@ -66,12 +67,22 @@ button:focus{
 }
 
 .close-button{
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
-  top: 0;
-  right: 0;
   margin: 8px;
+  opacity: .5;
   padding: 0;
+  z-index: 1;
+}
+
+.close-button:hover{
+  opacity: 1;
+}
+
+.button-container {
+  position:absolute;
+  top: 0;
+  right: 56px;
 }
 
 .material-icons{
@@ -227,13 +238,13 @@ i {
   opacity: 0;
 }
 
-.career dd:nth-of-type(1){animation: show .3s .8s forwards;}
-.career dd:nth-of-type(2){animation: show .3s 1.1s forwards;}
-.career dd:nth-of-type(3){animation: show .3s 1.4s forwards;}
-.career dd:nth-of-type(4){animation: show .3s 2.0s forwards;}
-.career dd:nth-of-type(5){animation: show .3s 2.3s forwards;}
-.career dd:nth-of-type(6){animation: show .3s 2.9s forwards;}
-.career dd:nth-of-type(7){animation: show .3s 3.2s forwards;}
+.career dd:nth-of-type(1){animation: show .3s 1.8s forwards;}
+.career dd:nth-of-type(2){animation: show .3s 2.1s forwards;}
+.career dd:nth-of-type(3){animation: show .3s 2.4s forwards;}
+.career dd:nth-of-type(4){animation: show .3s 3.0s forwards;}
+.career dd:nth-of-type(5){animation: show .3s 3.3s forwards;}
+.career dd:nth-of-type(6){animation: show .3s 3.9s forwards;}
+.career dd:nth-of-type(7){animation: show .3s 4.2s forwards;}
 
 
 .career .inner-circle{
@@ -256,13 +267,13 @@ i {
   height: 10px;
 }
 
-.career .inner-circle:nth-of-type(1):after{animation: circleScale .3s  .8s forwards;}
-.career .inner-circle:nth-of-type(2):after{animation: circleScale .3s  1.1s forwards;}
-.career .inner-circle:nth-of-type(3):after{animation: circleScale .3s  1.4s forwards;}
-.career .inner-circle:nth-of-type(4):after{animation: circleScale .3s  2.0s forwards;}
-.career .inner-circle:nth-of-type(5):after{animation: circleScale .3s  2.3s forwards;}
-.career .inner-circle:nth-of-type(6):after{animation: circleScale .3s  2.9s forwards;}
-.career .inner-circle:nth-of-type(7):after{animation: circleScale .3s  3.2s forwards;}
+.career .inner-circle:nth-of-type(1):after{animation: circleScale .3s  1.8s forwards;}
+.career .inner-circle:nth-of-type(2):after{animation: circleScale .3s  2.1s forwards;}
+.career .inner-circle:nth-of-type(3):after{animation: circleScale .3s  2.4s forwards;}
+.career .inner-circle:nth-of-type(4):after{animation: circleScale .3s  3.0s forwards;}
+.career .inner-circle:nth-of-type(5):after{animation: circleScale .3s  3.3s forwards;}
+.career .inner-circle:nth-of-type(6):after{animation: circleScale .3s  3.9s forwards;}
+.career .inner-circle:nth-of-type(7):after{animation: circleScale .3s  4.2s forwards;}
 
 @keyframes circleScale {
   to{
@@ -278,7 +289,7 @@ i {
   width: 2px;
   height: 8px;
   transform-origin: top center;
-  animation: drawLine 3.1s ease-out .8s forwards;
+  animation: drawLine 3.1s ease-out 1.8s forwards;
 }
 
 @keyframes drawLine {
@@ -341,7 +352,7 @@ i {
   
 
 .career .inner-circle:first-of-type::before {
-  animation: sp-drawLine 3.1s ease-out .8s forwards;
+  animation: sp-drawLine 3.1s ease-out 1.8s forwards;
 }
 
 @keyframes sp-drawLine {

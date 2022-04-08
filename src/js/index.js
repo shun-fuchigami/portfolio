@@ -250,7 +250,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
     /**
      * クローズボタンが押された場合
      */
-    let closeButtons = document.querySelectorAll(".close-button");
+    let closeButtons = document.querySelectorAll(".button-container");
     closeButtons.forEach(button=>{
       button.addEventListener("click",(e)=>{
         button.parentElement.classList.toggle("show");
