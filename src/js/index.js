@@ -245,7 +245,6 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
 
     document.querySelector(".room button").addEventListener("click",()=>{
       document.querySelector(".how-to-container").classList.toggle("show");
-      document.querySelector(".how-to-container").classList.toggle("hidden");
     });
     
     /**
@@ -294,6 +293,8 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
           getButton(e.code).sprite.alpha = 1;
           tileContainer.ICON_MAP.forEach(icon=>{
             document.querySelector(`.${icon.name}-container`).classList.remove("show");
+            document.querySelector(".how-to-container").classList.remove("show");
+
           })
 
         }else{
@@ -339,6 +340,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
           getButton(button.code).sprite.alpha = 1;
           tileContainer.ICON_MAP.forEach(icon=>{
             document.querySelector(`.${icon.name}-container`).classList.remove("show");
+            document.querySelector(".how-to-container").classList.remove("show");
           })
 
         }else{

@@ -1,4 +1,3 @@
-
 /* common */
 
 body {
@@ -32,6 +31,22 @@ p {
   line-height: 1.8;
 }
 
+ul{
+  margin: 0;
+}
+li {
+  padding: 0;
+  margin: 0;
+}
+
+li + li{
+  margin-top: 8px;
+}
+
+dd{
+  margin: 0;
+}
+
 button {
   background: none;
   color: #03588C;
@@ -44,6 +59,10 @@ button {
 a:hover:not(h1 a),
 button:hover{
   opacity: .5;
+}
+
+button:focus{
+  outline: none;
 }
 
 .close-button{
@@ -89,11 +108,18 @@ i {
 }
 
 .how-to-container dl {
-  display: block;
-  width: 250px;
   padding: 16px 0;
   margin: 0 auto;
 }
+
+.how-to-container dd {
+  padding-left: 16px;
+}
+
+.how-to-container dd + dt{
+  padding-top: 16px;
+}
+
 
 
 /* container common */
@@ -112,28 +138,27 @@ i {
   background-color: rgba(255,255,255,.9);
   border-radius: 12px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0,.5);
-  padding: 16px 10%;
   margin: 56px auto;
-
+  padding: 16px 100px;
   overflow-y: scroll;
 }
 
-.how-to-container {
+.how-to-container {  
   width: 300px;
+  height: 500px;
 }
 
-.about-container,
+.about-container
+{
+  width: 600px;
+  height: 500px;
+}
+
 .career-container,
 .skill-container,
 .gallery-container
 {
-  width: 70%;
-}
-
-.career-container,
-.skill-container,
-.gallery-container
-{
+  width: 600px;
   height: 700px;
 }
 
@@ -157,9 +182,8 @@ i {
 }
 
 
-
 /* section  common*/
-
+.how-to,
 .about,
 .career,
 .skill,
@@ -178,21 +202,20 @@ i {
   grid-template-columns: 120px 1fr;
 }
 
-/* career section */
-
-.career .career-list{
-  display: grid;
-  grid-template-columns: 50px 1fr;
-}
-
-.career dl{
-  display: grid;
-  gap: 16px 0;
-  grid-template-columns:120px 50px 1fr;
-  grid-template-rows: 1fr 1fr 2fr 1fr 2fr 1fr 1fr ;
+.about dl:last-of-type{
   padding-bottom: 100px;
 }
 
+/* career section */
+
+.career dl{
+  display: grid;
+  margin: 0 auto;
+  gap: 16px 16px;
+  grid-template-columns: 72px 20px 1fr ;
+  grid-template-rows: 1fr 1fr 2fr 1fr 2fr 1fr 1fr ;
+  padding-bottom: 100px;
+}
 
 .career dd {
   opacity: 0;
@@ -208,11 +231,10 @@ i {
 
 
 .career .inner-circle{
-  display: flex;
   position: relative;
+  display: flex;
   justify-content: center;
   align-items: center;
-  margin:0 auto;
   width: 20px;
   height: 20px;
   box-sizing: border-box;
@@ -222,7 +244,6 @@ i {
   position: absolute;
   content:"";
   display: block;
-  margin: auto;
   border-radius: 50%;
   background-color: #F25260;
   width: 10px;
@@ -247,7 +268,6 @@ i {
   position: absolute;
   content:"";
   display: block;
-  margin: auto;
   background-color: #F25260;
   width: 2px;
   height: 8px;
@@ -270,10 +290,9 @@ i {
   display: grid;
   padding-top: 48px auto;
   gap: 120px 8px;
-  grid-template-columns: repeat(auto-fit,minmax(400px,1fr));
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
   padding-bottom: 100px;
 }
-
 
 .skill dt {
   text-align: center;
@@ -285,58 +304,59 @@ i {
 
 .skill ul {
   display: block;
-  width: 300px;
+  width: 200px;
   margin: 0 auto;
-}
-
-.skill .fa-html5 {
-  color: #F25260;
-}
-
-.skill .fa-css3-alt {
-  color: #03588C;
-}
-
-.skill .fa-js-square {
-  color: #c7af2e;
-}
-
-.skill .fa-php {
-  color: #8993be;
-}
-
-.skill .fa-docker {
-  color: #03588C;
-}
-
-.skill .non-icon{
-  font-size: 32px;
-}
-
-.skill .non-icon.ai{
-  color: #F28F16;
-}
-
-.skill .non-icon.ps{
-  color: #03588C;
-}
-
-
-/* sp screen */
-@media (max-width: 880px) {
-
-  .career .inner-circle:first-of-type::before {
-    animation: sp-drawLine 3.1s ease-out .8s forwards;
-  }
-
-  @keyframes sp-drawLine {
-    from{
-      transform: scaleY(0);
-    }
-    to{
-      transform: scaleY(58);
-    }
-  }
   
 }
 
+.skill .fa-html5 {color: #F25260;}
+.skill .fa-css3-alt {color: #03588C;}
+.skill .fa-js-square {color: #c7af2e;}
+.skill .fa-php {color: #8993be;}
+.skill .fa-docker {color: #03588C;}
+.skill .non-icon{font-size: 32px;}
+.skill .non-icon.ai{color: #F28F16;}
+.skill .non-icon.ps{color: #03588C;}
+
+
+
+/* sp screen */
+@media (max-width: 650px) {
+
+.how-to-container,
+.about-container,
+.career-container,
+.skill-container,
+.gallery-container
+{
+  padding: 16px 20px;
+  overflow-y: scroll;
+}
+  
+
+.career .inner-circle:first-of-type::before {
+  animation: sp-drawLine 3.1s ease-out .8s forwards;
+}
+
+@keyframes sp-drawLine {
+  from{
+    transform: scaleY(0);
+  }
+  to{
+    transform: scaleY(80);
+  }
+}   
+
+.about-container{
+  width: 300px;
+  height: 500px;
+}
+
+.career-container,
+.skill-container,
+.gallery-container{
+  width: 300px;
+  height: 700px;
+}
+  
+}
