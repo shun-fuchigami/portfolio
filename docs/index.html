@@ -5,30 +5,34 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
-  <title>.PorFolio Room.</title>
+  <script src="https://kit.fontawesome.com/7bf28734ec.js" crossorigin="anonymous"></script>  
+  <title>.PortFolio Room.</title>
 </head>
 
 <body>
   <section class="room">
-    <h1><a href="">.PorFolio Room.</a></h1>
+    <h1><a href="">.PortFolio Room.</a></h1>
     <nav><button>HOW TO PLAY</button></nav>
     <div class="how-to-container">
-      <dl>
-        <dt>仮想コントローラ</dt>
-        <dd>方向ボタン：移動</dd>
-        <dd>Aボタン：決定</dd>
-        <dd>Bボタン：キャンセル</dd>
-        <dt>キーボード</dt>
-        <dd>方向キー：移動</dd>
-        <dd>Zキー：決定</dd>
-        <dd>Xキー：キャンセル</dd>
+      <section>
+        <h1>操作説明</h1>
+        <dl>
+          <dt>仮想コントローラ</dt>
+          <dd>方向ボタン：移動</dd>
+          <dd>Aボタン：決定</dd>
+          <dd>Bボタン：キャンセル</dd>
+          <dt>キーボード</dt>
+          <dd>方向キー：移動</dd>
+          <dd>Zキー：決定</dd>
+          <dd>Xキー：キャンセル</dd>
+        </dl>
         <p>各アイコンの前で決定をすると情報を見ることができます。</p>
         <p>まずはAboutアイコンの前で決定を押してみましょう。</p>
-      </dl>
+      </section>
       <button class="close-button"><span class="material-icons">cancel</span></button>
     </div>
     <main id ="app"></main>
@@ -41,18 +45,19 @@
         <dt>製作者の名前:</dt>
         <dd>渕上 舜</dd>
       </dl>
-      <p>PIXI.jsライブラリを利用して自主制作した2.5Dゲーム風のポートフォリオサイトです。</p>
-      <p>配色は<a href="https://www.behance.net/gallery/98856045/The-Double-Standards-in-gender?tracking_source=curated_galleries_list">こちら</a>を参考にしています。</p>
-      <h2>各アイコンについて</h2>
+      <p>自主制作した2.5Dゲーム風のポートフォリオサイトです。</p>
+      <p>”私を知ってもらう”をコンセプトに趣味のゲーム、好きな色合いをベースにした世界観で制作しています。</p>
+      <p>ギャラリーについてはweb制作、デザインの実務未経験のため、全て架空の自主制作品となりますのでご了承ください。</p>
+      <h2>各アイコンのコンテンツについて</h2>
       <dl>
           <dt>About:</dt>
-          <dd>このサイトの説明</dd>  
+          <dd>このサイトの説明です。</dd>  
           <dt>Career:</dt>
-          <dd>製作者の経歴</dd>  
+          <dd>製作者の経歴を見ることができます。</dd>  
           <dt>Skill:</dt>
-          <dd>製作者の利用可能ツール・言語</dd>  
+          <dd>製作者のweb制作スキルについて見ることができます。</dd>  
           <dt>Gallery:</dt>
-          <dd>ポートフォリオのギャラリー</dd>  
+          <dd>自主制作物のギャラリーです。</dd>  
       </dl>
     </section>
     <button class="close-button"><span class="material-icons">cancel</span></button>
@@ -61,66 +66,157 @@
   <div class="career-container">
     <section class="career">
       <h1>製作者の経歴</h1>
-        <dl>
-          <div class="outer-circle">
-            <div class="line"></div>
-          </div>
-          <dt>2019年〜</dt><dd></dd>
+        <h2>概要</h2>
+        <p>明治大学卒業後にアクセンチュア株式会社へ入社し、SIとして2年半勤務</p>
+        <p>保守運用の担当期間が長く、サービスデスクとしてエンドユーザからの問い合わせ対応、データメンテナンス、障害発生時の原因調査、クライアントとの緩衝役などを経験</p>
+        <p>システム導入PJ参画時にはテスト、運用手順書の作成、システム引き継ぎを経験</p>
+        <h2>年表</h2>
+        <dl>          
+          <dt>2019.4</dt>
+          <div class="inner-circle"></div>
+          <dd>明治大学 経営学部 経営学科 卒業</dd>  
 
-          <div class="outer-circle"></div>
-          <dt>2019年4月</dt><dd>明治大学経営学部経営学科 卒業</dd>  
+          <dt>2019.6</dt>
+          <div class="inner-circle"></div>
+          <dd>アクセンチュア株式会社 入社</dd>
 
-          <div class="outer-circle"></div>
-          <dt>2019年6月</dt><dd>アクセンチュア株式会社 入社・3ヶ月の研修</dd>
+          <dt>2019.9</dt>
+          <div class="inner-circle"></div>
+          <dd>製薬業界クライアントの営業支援システムの保守運用PJへ参画。</dd>  
 
-          <div class="outer-circle"></div>
-          <dt>2019年9月</dt><dd>製薬業界クライアントの営業支援システムの保守運用PJへ参画。</dd>  
+          <dt>2020.10</dt>
+          <div class="inner-circle"></div>
+          <dd>同クライアントの決裁システム導入PJへ参画</dd>  
 
-          <div class="outer-circle"></div>
-          <dt>2020年〜</dt><dd></dd>
+          <dt>2020.12</dt>
+          <div class="inner-circle"></div>
+          <dd>決裁システムの保守運用の主担当に就任</dd>
 
-          <div class="outer-circle"></div>
-          <dt>2020年10月</dt><dd>同クライアントの決裁システム導入PJへ参画</dd>  
+          <dt>2021.12</dt>
+          <div class="inner-circle"></div>
+          <dd>保険業界クライアントの基幹システム導入PJへ参画</dd>
 
-          <div class="outer-circle"></div>
-          <dt>2020年12月</dt><dd>決裁システムの保守運用の主担当に就任</dd>
-
-          <div class="outer-circle"></div>
-          <dt>2021年〜</dt><dd></dd>
-
-          <div class="outer-circle"></div>
-          <dt>2021年12月</dt><dd>保険業界クライアントの基幹システム導入PJへ参画</dd>
-
-          <div class="outer-circle"></div>
-          <dt>2022年〜</dt><dd></dd>
-
-          <div class="outer-circle"></div>
-          <dt>2022年2月</dt><dd>休職、転職活動に向け学習を始める</dd>
+          <dt>2022.2</dt>
+          <div class="inner-circle"></div>
+          <dd>休職、転職活動に向けweb制作の学習を開始</dd>
         </dl>
-    </section>
-    <button class="close-button"><span class="material-icons">cancel</span></button>
+
+      </section>
+      <button class="close-button"><span class="material-icons">cancel</span></button>
   </div>
 
 
   <div class="skill-container">
     <section class="skill">
-      <h1>このサイトについて</h1>
+      <h1>製作者のスキルについて</h1>
+      <h2>扱える言語</h2>
       <dl>
-        <dt>製作者の名前:</dt>
-        <dd>渕上 舜</dd>
+        <div>
+          <dt><i class="fa-brands fa-html5"></i></dt>
+          <dt>HTML</dt>
+          <dd>
+            <ul>
+              <li>基本文法</li>
+              <li>マークアップ</li>
+              <li>静的サイトの作成</li>
+            </ul>
+          </dd>  
+        </div>
+
+        <div>
+          <dt><i class="fa-brands fa-css3-alt"></i></dt>
+          <dt>CSS</dt>
+          <dd>
+            <ul>
+              <li>基本文法</li>
+              <li>レスポンシブ対応</li>
+              <li>アニメーションを使った装飾</li>
+            </ul>
+          </dd> 
+        </div>
+
+        <div>
+          <dt><i class="fa-brands fa-js-square"></i></dt>
+          <dt>JavaScript</dt>
+          <dd>
+            <ul>
+              <li>基本文法</li>
+              <li>DOM操作</li>
+              <li>Jqueryを利用した実装</li>
+              <li>Reactを利用した実装</li>
+              <li>PixiJSを利用した実装</li>
+            </ul>
+          </dd>  
+        </div>
+         
+        <div>
+          <dt><i class="fa-brands fa-php"></i></dt>
+          <dt>PHP</dt>
+          <dd>
+            <ul>
+              <li>基本文法</li>
+              <li>クッキー操作</li>
+              <li>セッション操作</li>
+              <li>データベース操作</li>
+              <li>動的サイトの作成</li>
+              <li>Laravelを利用した実装</li>
+            </ul>
+          </dd>  
+        </div>
+        <div>
+          <i></i>
+          <dt><span class="non-icon">SQL</dt></span>
+          <dt>SQL</dt>
+          <dd>
+            <ul>
+              <li>基本文法</li>
+              <li>データのCLUD操作</li>
+            </ul>
+          </dd>  
+        </div>
+
       </dl>
-      <p>PIXI.jsライブラリを利用して自主制作した2.5Dゲーム風のポートフォリオサイトです。</p>
-      <p>配色は<a href="https://www.behance.net/gallery/98856045/The-Double-Standards-in-gender?tracking_source=curated_galleries_list">こちら</a>を参考にしています。</p>
-      <h2>各アイコンについて</h2>
+      <h2>利用できるツール</h2>
       <dl>
-          <dt>About:</dt>
-          <dd>このサイトの説明</dd>  
-          <dt>Career:</dt>
-          <dd>製作者の経歴</dd>  
-          <dt>Skill:</dt>
-          <dd>製作者の利用可能ツール・言語</dd>  
-          <dt>Gallery:</dt>
-          <dd>ポートフォリオのギャラリー</dd>  
+        <div>
+          <dt><span class="non-icon ai">Ai</span></dt>
+          <dt>Adobe Illustrator</dt>
+          <dd>
+            <ul>
+              <li>基本操作</li>
+            </ul>
+          </dd>  
+        </div>
+
+        <div>
+          <dt><span class="non-icon ps">Ps</span></dt>
+          <dt>Adobe PhotoShop</dt>
+          <dd>
+            <ul>
+              <li>基本操作</li>
+            </ul>
+          </dd>  
+        </div>
+
+        <div>
+          <dt><i class="fa-brands fa-docker"></i></dt>
+          <dt>Docker</dt>
+          <dd>
+            <ul>
+              <li>基本操作</li>
+            </ul>
+          </dd>  
+        </div>
+
+        <div>
+          <dt><i class="fa-brands fa-git-alt"></i></dt>
+          <dt>git</dt>
+          <dd>
+            <ul>
+              <li>基本操作</li>
+            </ul>
+          </dd>  
+        </div>
       </dl>
     </section>
     <button class="close-button"><span class="material-icons">cancel</span></button>
@@ -129,24 +225,9 @@
 
   <div class="gallery-container">
     <section class="gallery">
-      <h1>このサイトについて</h1>
-      <dl>
-        <dt>製作者の名前:</dt>
-        <dd>渕上 舜</dd>
-      </dl>
-      <p>PIXI.jsライブラリを利用して自主制作した2.5Dゲーム風のポートフォリオサイトです。</p>
-      <p>配色は<a href="https://www.behance.net/gallery/98856045/The-Double-Standards-in-gender?tracking_source=curated_galleries_list">こちら</a>を参考にしています。</p>
-      <h2>各アイコンについて</h2>
-      <dl>
-          <dt>About:</dt>
-          <dd>このサイトの説明</dd>  
-          <dt>Career:</dt>
-          <dd>製作者の経歴</dd>  
-          <dt>Skill:</dt>
-          <dd>製作者の利用可能ツール・言語</dd>  
-          <dt>Gallery:</dt>
-          <dd>ポートフォリオのギャラリー</dd>  
-      </dl>
+      <h1>自主制作品のギャラリー</h1>
+      <p>全て自主制作品です。</p>
+
     </section>
     <button class="close-button"><span class="material-icons">cancel</span></button>
   </div>
