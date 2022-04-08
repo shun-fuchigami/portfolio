@@ -289,16 +289,15 @@ i {
   width: 2px;
   height: 8px;
   transform-origin: top center;
-  -webkit-transform-origin: top center;
   animation: drawLine 3.1s ease-out 1.8s forwards;
 }
 
 @keyframes drawLine {
   from{
-    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
   }
   to{
-    -webkit-transform: scaleY(36);
+    transform: scaleY(36);
   }
 }
 
@@ -358,10 +357,10 @@ i {
 
 @keyframes sp-drawLine {
   from{
-    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
   }
   to{
-    -webkit-transform: scaleY(81);
+    transform: scaleY(82);
   }
 }   
 
