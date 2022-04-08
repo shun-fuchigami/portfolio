@@ -360,7 +360,7 @@ i {
     transform: scaleY(0);
   }
   to{
-    transform: scaleY(80);
+    transform: scaleY(81);
   }
 }   
 
