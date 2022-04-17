@@ -337,12 +337,12 @@ i {
 
 /* gallery section */
 
-.gallery img {
+.gallery-content img {
   display: block;
   margin: 0 auto;
 }
 
-.gallery h1 {
+.gallery-content h1 {
   text-align: center;
 }
 
@@ -411,7 +411,7 @@ i {
   width: 300px;
 }
   
-.skill .gallery-content img {
+.gallery-content img {
   width: 300px;
 }
 
