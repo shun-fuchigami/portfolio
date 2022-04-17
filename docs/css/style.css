@@ -347,6 +347,7 @@ i {
 .gallery-content h1,
 .gallery-content a 
 {
+  display: block;
   text-align: center;
 }
 
