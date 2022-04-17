@@ -344,7 +344,7 @@ i {
   height: auto;
 }
 
-.gallery-content h1 
+.gallery-content h1,
 .gallery-content a 
 {
   text-align: center;
@@ -358,6 +358,9 @@ i {
 /* midium screen */
 @media (max-width: 800px) {
 
+  .close-button{
+    position: absolute;
+  }
 
   .how-to-container,
   .about-container,
