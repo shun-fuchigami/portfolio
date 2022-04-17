@@ -335,6 +335,17 @@ i {
 .skill .non-icon.ai{color: #F28F16;}
 .skill .non-icon.xd{color: #ff61f7;}
 
+.skill .gallery-container img {
+  margin: 0 auto;
+}
+
+.skill .gallery-container h1 {
+  text-align: center;
+}
+
+.gallery-container + .gallery-container {
+  margin-top: 24px;
+}
 
 /* midium screen */
 @media (max-width: 800px) {
