@@ -335,16 +335,21 @@ i {
 .skill .non-icon.ai{color: #F28F16;}
 .skill .non-icon.xd{color: #ff61f7;}
 
-.skill .gallery-container img {
+.skill .gallery-content img {
+  display: block;
   margin: 0 auto;
 }
 
-.skill .gallery-container h1 {
+.skill .gallery-content h1 {
   text-align: center;
 }
 
-.gallery-container + .gallery-container {
-  margin-top: 24px;
+.gallery-content {
+  padding-bottom: 50px;
+}
+
+.gallery-content:nth-of-type() {
+  padding-bottom: 100px;
 }
 
 /* midium screen */
@@ -407,6 +412,10 @@ i {
   width: 300px;
 }
   
+.skill .gallery-content img {
+  width: 300px;
+}
+
 }
 
 
