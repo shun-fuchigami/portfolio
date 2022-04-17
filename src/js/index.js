@@ -2,11 +2,13 @@ import * as PIXI from 'pixi.js';
 import { App } from './app/App.js';
 import { Tile } from './sprite/Tile.js';
 import { Hero } from './sprite/Hero.js';
+import { Icon } from './sprite/Icon.js';
 import { Key } from './key/Key.js';
 import { Controller } from './sprite/controller/Controller.js';
 import { BackGroundGraphics } from './graphics/BackGroundGraphics.js';
+import { ContainerHitArea } from './graphics/ContainerHitArea.js';
 import { TileContainer } from './container/TileContainer.js';
-import { TILE_MAP_SIZE,viewWidth,viewHeight, TILE_HEIGHT, TILE_WIDTH} from './config.js' 
+import { TILE_MAP_SIZE,viewWidth,viewHeight, TILE_HEIGHT, TILE_WIDTH, DEF_HEIGHT} from './config.js' 
 import { ButtonContainer } from './container/Controller/ButtonContainer.js';
 import { ArrowContainer } from './container/Controller/ArrowContainer.js';
 
@@ -16,7 +18,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
  */ 
 
    function resize(scaleNum){
-    app.renderer.resize(viewWidth(),viewHeight());
+    app.renderer.resize(viewWidth(),DEF_HEIGHT);
     tileContainer.initPosition();
     outerCircle.initGraphics();
     outerCircle.renderOuterCircle();
@@ -24,6 +26,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
     innerCircle.renderInnerCircle();
 
     if(scaleNum > 0.5){ 
+      app.renderer.resize(viewWidth(),DEF_HEIGHT - 200);
       tileContainer.container.scale.set(scaleNum);
       arrowContainer.container.scale.set(scaleNum);
       buttonContainer.container.scale.set(scaleNum);
@@ -32,12 +35,12 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
       arrowContainer.container.y = tileContainer.getTileGlobalPosition(7,9,"y");
       buttonContainer.container.y = tileContainer.getTileGlobalPosition(7,9,"y");
     }else{
-      app.renderer.resize(viewWidth(),viewHeight()-200);
+      app.renderer.resize(viewWidth(),DEF_HEIGHT - 400);
       tileContainer.container.scale.set(scaleNum);
-      arrowContainer.container.scale.set(scaleNum);
-      buttonContainer.container.scale.set(scaleNum);
-      arrowContainer.container.x = tileContainer.getTileGlobalPosition(0,4,"x");
-      buttonContainer.container.x = tileContainer.getTileGlobalPosition(4,0,"x");
+      arrowContainer.container.scale.set(scaleNum + 0.2);
+      buttonContainer.container.scale.set(scaleNum + 0.2);
+      arrowContainer.container.x = tileContainer.getTileGlobalPosition(0,6,"x");
+      buttonContainer.container.x = tileContainer.getTileGlobalPosition(6,0,"x");
       arrowContainer.container.y = tileContainer.getTileGlobalPosition(9,9,"y");
       buttonContainer.container.y = tileContainer.getTileGlobalPosition(9,9,"y");
     }
@@ -45,6 +48,31 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
   }
 
 
+  /**
+   * ロード・リサイズ
+   */
+   window.addEventListener('load',()=>{
+  
+    if(viewWidth() >= 1028){
+        resize(0.8)
+      }else if(viewWidth() >= 800){
+        resize(0.8)
+      }else{
+        resize(0.4)
+      }
+    })
+  
+    window.addEventListener('resize',()=>{
+      
+      if(viewWidth() >= 1028){
+        resize(0.8)
+      }else if(viewWidth() >= 800){
+        resize(0.8)
+      }else{
+        resize(0.4)
+      }
+    })
+  
 
 /**
  * メイン処理
@@ -79,19 +107,66 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
   const tileContainer = new TileContainer();
   app.stage.addChild(tileContainer.container);
 
+
   /**
    * タイルスプライトの生成・コンテナ追加
    */
   for (let i = 0; i < TILE_MAP_SIZE; i++){
     for (let j = 0; j < TILE_MAP_SIZE; j++){
       let tile = new Tile(i,j);
-      tile.initTile();
       tileContainer.addSprite(tile);
-      tileContainer.setTile(tile);
+      tileContainer.container.addChild(tile.lineSprite);
+      tileContainer.pushTileMap(tile);
     }
   }
 
-  tileContainer.setTileHitArea();
+  /**
+   * コンテナーのヒットエリア生成
+   * タイルの4角が頂点
+   */
+
+   const containerHitArea = new ContainerHitArea(tileContainer.createPolygon());
+
+  /**
+   * アイコンスプライトの生成
+   * 初期位置へ配置
+   * タイルコンテナでアイコンスプライトを保持
+   */
+
+     const aboutIcon = new Icon("about");
+     aboutIcon.sprite.position.set(
+       tileContainer.getTilePosition(0,7,"x"),
+       tileContainer.getTilePosition(0,7,"y")
+     )
+     tileContainer.ICON_MAP.push(aboutIcon);
+     tileContainer.addSprite(aboutIcon);
+
+
+     const careerIcon = new Icon("career");
+     careerIcon.sprite.position.set(
+       tileContainer.getTilePosition(0,3,"x"),
+       tileContainer.getTilePosition(0,3,"y")
+     )
+     tileContainer.ICON_MAP.push(careerIcon);
+     tileContainer.addSprite(careerIcon);
+
+     
+     const skillIcon = new Icon("skill");
+     skillIcon.sprite.position.set(
+       tileContainer.getTilePosition(3,0,"x"),
+       tileContainer.getTilePosition(3,0,"y")
+     )
+     tileContainer.ICON_MAP.push(skillIcon);
+     tileContainer.addSprite(skillIcon);
+
+     const galleryIcon = new Icon("gallery");
+     galleryIcon.sprite.position.set(
+       tileContainer.getTilePosition(7,0,"x"),
+       tileContainer.getTilePosition(7,0,"y")
+     )
+     tileContainer.ICON_MAP.push(galleryIcon);
+     tileContainer.addSprite(galleryIcon);
+  
 
   /**
    * ヒーロースプライトの生成
@@ -104,7 +179,7 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
     tileContainer.getTilePosition(9,9,"x"),
     tileContainer.getTilePosition(9,9,"y")
   )
-  tileContainer.OBJECT_MAP.push(hero);
+  tileContainer.HERO_MAP.push(hero);
   tileContainer.addSprite(hero);
 
 
@@ -164,120 +239,208 @@ import { ArrowContainer } from './container/Controller/ArrowContainer.js';
  * イベントリスナー
  */
 
-  /**
-   * ロード・リサイズ
-   */
-   window.addEventListener('load',()=>{
-      
-    if(viewWidth() >= 1028){
-      resize(0.9)
-    }else if(viewWidth() >= 800){
-      resize(0.8)
-    }else{
-      resize(0.5)
-    }
-  })
-
-  window.addEventListener('resize',()=>{
-    
-    if(viewWidth() >= 1028){
-      resize(0.9)
-    }else if(viewWidth() >= 800){
-      resize(0.8)
-    }else{
-      resize(0.5)
-    }
-  })
-
-  /**
-   * キーボード操作
-   */
     /**
-     * コードから仮想コントローラのボタンを返す
-     * @param {String} code 
-     * @returns 
+     * 操作説明ボタンが押された場合
      */
-    function getButton(code){
-      let button = buttons.find((button)=>{
-        return button.code === code;
-      })
-      return button;
-    }
 
-     document.addEventListener('keydown',(e)=>{
-      e.preventDefault();
-      if(key.checkInvalidkey(e.code) === false){
-        return;
-      }
-      getButton(e.code).sprite.alpha = 1;
-      key.setStatus(e.code,true);
+    document.querySelector(".room button").addEventListener("click",()=>{
+      document.querySelector(".how-to-container").classList.toggle("show");
     });
     
-    document.addEventListener('keyup',(e)=>{
-      e.preventDefault();
-      if(key.checkInvalidkey(e.code) === false){
-        return;
-      }
-      getButton(e.code).sprite.alpha = 0.5;
-      key.setStatus(key.code,false);
+    /**
+     * クローズボタンが押された場合
+     */
+    let closeButtons = document.querySelectorAll(".button-container");
+    closeButtons.forEach(button=>{
+      button.addEventListener("click",(e)=>{
+        button.parentElement.classList.toggle("show");
+
+      })
     })
 
-  /**
-   * 仮想コントローラー操作
-   */
-    buttons.forEach((button)=>{
-      button.sprite.on('pointerdown',(e)=>{
-        if(key.checkInvalidkey(button.code) === false){
-            return;
-        }
-          button.sprite.alpha = 1;
-          key.setStatus(button.code,true);
+    /**
+     * キーボード操作
+     */
+      /**
+       * コードから仮想コントローラの対応ボタンを返す
+       * @param {string} code 
+       * @returns 
+       */
+      function getButton(code){
+        let button = buttons.find((button)=>{
+          return button.code === code;
         })
-        
-        button.sprite.on('pointerup',(e)=>{
-          if(key.checkInvalidkey(button.code) === false){
-            return;
+        return button;
+      }
+  
+      /**
+       * キーが押下された場合
+       */
+       document.addEventListener('keydown',(e)=>{
+        e.preventDefault();
+  
+        if(key.checkArrowKey(e.code)){
+          getButton(e.code).sprite.alpha = 1;
+          key.setStatus(e.code,true);
+
+        }else if (key.checkZKey(e.code)){
+          getButton(e.code).sprite.alpha = 1;
+          if(hero.selectTile.onIcon){
+            document.querySelector(`.${hero.selectTile.icon.name}-container`).classList.add("show");
           }
+          
+        }else if (key.checkXKey(e.code)){
+          getButton(e.code).sprite.alpha = 1;
+          tileContainer.ICON_MAP.forEach(icon=>{
+            document.querySelector(`.${icon.name}-container`).classList.remove("show");
+            document.querySelector(".how-to-container").classList.remove("show");
+
+          })
+
+        }else{
+          return;
+        };
+      });
+      
+      /**
+       * キーの押下が終了した場合
+       */
+      document.addEventListener('keyup',(e)=>{
+        e.preventDefault();
+        if(key.checkKey(e.code)){
+          getButton(e.code).sprite.alpha = 0.5;
+          key.setStatus(key.code,false);
+        }else{
+          return;
+        };
+      });
+  
+    /**
+     * 仮想コントローラー操作
+     * ボタン配列をループしてイベントを追加
+     */
+      
+    buttons.forEach((button)=>{
+      
+      /**
+       * ボタンが押下された場合
+       */
+      button.sprite.on('pointerdown',(e)=>{
+        if(key.checkArrowKey(button.code)){
+          getButton(button.code).sprite.alpha = 1;
+          key.setStatus(button.code,true);
+
+        }else if (key.checkZKey(button.code)){
+          getButton(button.code).sprite.alpha = 1;
+          if(hero.selectTile.onIcon){
+            document.querySelector(`.${hero.selectTile.icon.name}-container`).classList.add("show");
+          }
+          
+        }else if (key.checkXKey(button.code)){
+          getButton(button.code).sprite.alpha = 1;
+          tileContainer.ICON_MAP.forEach(icon=>{
+            document.querySelector(`.${icon.name}-container`).classList.remove("show");
+            document.querySelector(".how-to-container").classList.remove("show");
+          })
+
+        }else{
+          return;
+        };
+      });
+
+      /**
+       * ボタンの押下が終了した場合
+       */ 
+      button.sprite.on('pointerup',(e)=>{
+        if(key.checkKey(button.code)){
           button.sprite.alpha = 0.5;
           key.setStatus(button.code,false);
-        })
-    })
-    
+        }
+      });
+    });
+
+
   /**
    * アニメーションループ
    */
-
    app.ticker.add((dt)=>{
     
-    if(key.isKeyDown && key.isFirst){
-      hero.setDirection(key.code);
+    /**
+     * アイコンスプライトのアニメーション開始
+     */
+    aboutIcon.sprite.play();
+    careerIcon.sprite.play();
+    skillIcon.sprite.play();
+    galleryIcon.sprite.play();
 
-    }else if(key.isKeyDown && !(key.isFirst)){
+    /**
+     * ヒーロースプライト・アイコンスプライトの位置の更新
+     */
+    hero.initPoint();
+    aboutIcon.initPoint();
+    careerIcon.initPoint();
+    skillIcon.initPoint();
+    galleryIcon.initPoint();
 
-      let nextX = hero.getNextFramePosition(key.code)["x"];
-      let nextY = hero.getNextFramePosition(key.code)["y"];
-      let nextTile = tileContainer.getCurrentTile(nextX,nextY); 
+    /**
+     * ヒーロースプライト・アイコンスプライトのタイル位置更新
+     */
+    tileContainer.setOnIconTile(aboutIcon);
+    tileContainer.setOnIconTile(careerIcon);
+    tileContainer.setOnIconTile(skillIcon);
+    tileContainer.setOnIconTile(galleryIcon);
+    tileContainer.setOnHeroTile(hero);
 
-      console.log(nextTile)
-      
-      if(nextTile==null){
+    /**
+     * 移動処理
+     */
+
+      /**
+       * キー1回目の押下
+       * ヒーロースプライトの方向をセット
+       */
+      if(key.isKeyDown && key.isFirst){
+        hero.setDirection(key.code);
+
+      /**
+       * キー2回目以降の押下
+       * ヒーロースプライトの向く方向へ移動
+       */
+      }else if(key.isKeyDown && !(key.isFirst)){
+
+        if( !containerHitArea.checkContains(hero) ||
+            tileContainer.getTile(hero.tileX,hero.tileY).onIcon 
+          ){
+          hero.sprite.stop();
+          hero.moveReset(hero.direction);
+          hero.initSpriteFrame();  
+          key.initStatus();
+        }else{
+          hero.move(hero.direction)
+          hero.sprite.play()
+        }
+
+      /**
+       * キーが押下されていない場合
+       * 移動を止める
+       */
+      }else {
         hero.sprite.stop();
-        hero.initSpriteFrame();  
-        key.initStatus();
+        hero.initSpriteFrame();
       }
-      hero.move(key.code)
-      hero.sprite.play()
 
-    }else {
-      hero.sprite.stop();
-      hero.initSpriteFrame();
+    /**
+     * ヒーロースプライトの方向に応じて次のタイルをハイライト
+     */
+    try{
+      tileContainer.highLightTile(hero.selectTile.tileX, hero.selectTile.tileY)
+    }catch{
+      return;
+      /**
+       * 何もしない
+       */
     }
-
-    try {
-      tileContainer.checkOnHeroTile(hero);
-    } catch (error) {
-
-    }
+  
   });
 
 

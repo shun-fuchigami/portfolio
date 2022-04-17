@@ -26,7 +26,7 @@ export class LoaderImg{
       "ArrowLeft":[],
     };
 
-    for(let i=0; i <= 3; i++){
+    for(let i=0; i < 4; i++){
       heroImgs.ArrowUp.push(`./imgs/heros/hero-right-up-${i}.png`);
       heroImgs.ArrowDown.push(`./imgs/heros/hero-left-down-${i}.png`);
       heroImgs.ArrowRight.push(`./imgs/heros/hero-right-down-${i}.png`);
@@ -59,5 +59,13 @@ export class LoaderImg{
   static controllerLoad(name){
     return new PIXI.Sprite.from(`./imgs/buttons/button-${name}.png`);
   }
-}
+  
+  static iconLoad(name){
+    let iconTextures = [];
+    for(let i = 0; i < 7; i++ ){
+      iconTextures.push(new PIXI.Texture.from(`./imgs/icons/${name}/icon-${i}.png`));
+    }
 
+    return iconTextures;
+  }
+}

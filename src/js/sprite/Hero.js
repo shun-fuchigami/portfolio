@@ -8,20 +8,22 @@ import { LoaderImg } from '../loader/LoaderImg.js';
 export class Hero{
   /**
    * コンストラクター
-   * 初期位置のタイルを引数に生成
-   * @param {*} tileX 
-   * @param {*} tileY 
    */
-  constructor(tileX,tileY){
+  constructor(){
     this.textures = LoaderImg.heroTexturesLoad();
-    this.tileX = tileX;
-    this.tileY = tileY;
-    this.speed = 2;
+    this.tileX = 0;
+    this.tileY = 0;
+    // this.speed = 4;
+    this.speed = 8;
+    this.backSpeed = TILE_HEIGHT;
+    this.direction = "ArrowDown";
     this.sprite = new PIXI.AnimatedSprite(this.textures["ArrowDown"]);
     this.sprite.anchor.set(0.5,1);
     this.sprite.interactive = true;
     this.sprite.animationSpeed = 0.17
-
+    this.point = new PIXI.Point();
+    this.onTile;
+    this.selectTile;
   }
 
   /**
@@ -29,6 +31,10 @@ export class Hero{
    */
   initSpriteFrame(){
     this.sprite.texture = this.sprite.textures[0];
+  }
+
+  initPoint(){
+    this.point.set(this.sprite.x,this.sprite.y - TILE_HEIGHT *1.5);
   }
 
   /**
@@ -39,6 +45,7 @@ export class Hero{
   setDirection(direction="ArrowDown"){
     this.sprite.textures = this.textures[direction]
     this.sprite.texture = this.textures[direction][0];
+    this.direction = direction;
   }
 
   /**
@@ -68,6 +75,38 @@ export class Hero{
         }
       }
 
+      /**
+   * 引数に渡された方向と逆方向へヒーロースプライトを移動する
+   * @param {*} direction 
+   */
+  moveReset(direction){
+    switch(direction){
+      case "ArrowUp":
+        this.sprite.x -= this.backSpeed;
+        this.sprite.y += this.backSpeed / 2;
+        break;
+      case "ArrowDown":
+        this.sprite.x += this.backSpeed;
+        this.sprite.y -= this.backSpeed / 2;
+        break;
+      case "ArrowRight":
+        this.sprite.x -= this.backSpeed;
+        this.sprite.y -= this.backSpeed / 2;
+        break;
+      case "ArrowLeft":
+        this.sprite.x += this.backSpeed;
+        this.sprite.y += this.backSpeed / 2;
+        break;
+      default:
+        break;
+      }
+    }
+
+  /**
+   * xもしくはyのローカル座標を返す
+   * @param {*} type 
+   * @returns 
+   */
   getPosition(type="x"){
     if(type==="x"){
       return this.sprite.x
@@ -77,38 +116,52 @@ export class Hero{
   }
 
   /**
-   * 進行方向のx,y座標を取得
-   * タイル端の移動のため、取得範囲を微調整
-   * @param {*} direction 
-   * @returns 
+   * ヒーロースプライトの向く方向の次のタイルの座標を返す
+   * @returns {x:number,y:number}
    */
-  getNextFramePosition(direction){
-    let x = 0;
-    let y = 0;
-    switch(direction){
+  getNextTile(){
+    let nextTileX;
+    let nextTileY;
+    switch(this.direction){
       case "ArrowUp":
-        x = this.sprite.x + TILE_WIDTH/2;
-        y = this.sprite.y - TILE_HEIGHT/2;
+        nextTileX = this.tileX;
+        nextTileY = this.tileY - 1;
         break;
       case "ArrowDown":
-        x = this.sprite.x - 8;
-        y = this.sprite.y + 4;
+        nextTileX = this.tileX;
+        nextTileY = this.tileY + 1;
         break;
       case "ArrowRight":
-        x = this.sprite.x + 8;
-        y = this.sprite.y + 4;
+        nextTileX = this.tileX + 1;
+        nextTileY = this.tileY;
         break;
       case "ArrowLeft":
-        x = this.sprite.x - TILE_WIDTH/2;
-        y = this.sprite.y - TILE_HEIGHT/2;
+        nextTileX = this.tileX - 1;
+        nextTileY = this.tileY;
         break;
       default:
         break;
       }
-      return {x:x,y:y};
+      return {x:nextTileX,y:nextTileY}
     }
-    
 
+  /**
+   * 引数に渡したタイルをヒーローに保持する
+   * @param {Tile} tile 
+   */
+  setOnTile(tile){
+    this.onTile = tile;
+    this.tileX = tile.tileX;
+    this.tileY = tile.tileY;
   }
+
+  /**
+   * 引数に渡したタイル（選択状態のタイル）をヒーロに保持する
+   * @param {Tile} tile 
+   */
+  setSelectTile(tile){
+    this.selectTile = tile;
+  }
+}
 
 

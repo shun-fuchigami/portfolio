@@ -55,4 +55,5 @@ export const TILES = [
 
 export let viewWidth = () => window.innerWidth;
 export let viewHeight = () => window.innerHeight;
+export const DEF_HEIGHT = 900;
 
