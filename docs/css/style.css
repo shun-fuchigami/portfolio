@@ -67,7 +67,7 @@ button:focus{
 }
 
 .close-button{
-  position: fixed;
+  position: absolute;
   border-radius: 50%;
   margin: 8px;
   opacity: .5;
@@ -340,9 +340,13 @@ i {
 .gallery-content img {
   display: block;
   margin: 0 auto;
+  width: 500px;
+  height: auto;
 }
 
-.gallery-content h1 {
+.gallery-content h1 
+.gallery-content a 
+{
   text-align: center;
 }
 
@@ -382,6 +386,10 @@ i {
 
 /* sp screen */
 @media (max-width: 600px) {
+
+.close-button{
+  position: absolute;
+}
 
 .career .inner-circle:first-of-type::before {
   animation: sp-drawLine 3.1s ease-out 1.8s forwards;
